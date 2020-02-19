@@ -10,34 +10,48 @@
 <body>
 
 <script>
-// конструкция if
+    // конструкция if
 
     let a = 12;
     let b = 6;
-    let c = '*';
+    let c;
     let res;
 
+    console.log('производим операции над числами a = ' + a + ' b = ' + b);
+
+    console.log('тестируем сложение');
+    c = '+';
     if (c === '+') {
         res = a + b;
         console.log(res);
     }
+
+    console.log('тестируем вычитание');
+    c = '-';
     if (c === '-') {
         res = a - b;
         console.log(res);
     }
+
+    console.log('тестируем умножение');
+    c = '*';
     if (c === '*') {
         res = a * b;
         console.log(res);
     }
+
+    console.log('тестируем деление');
+    c = '/';
     if (c === '/') {
         res = a / b;
         console.log(res);
     }
 
-// конструкция switch
+    // конструкция switch
     let num1 = 18;
     let num2 = 6;
     let operator = '/';
+    console.log('производим операции над числами a = ' + num1 + ' b = ' + num2 + ' с помощью switch');
     let result;
 
     switch (operator) {
@@ -56,27 +70,29 @@
     }
     console.log(result);
 
-// конструкция switch c использованием метода prompt
-let n1 = +prompt('Введите число');
-let n2 = +prompt('Введите число');
-let operation = prompt('Введите - + / или *');
-let res1;
+    // конструкция switch c использованием метода prompt
+    console.log('Результаты вычислений с помощью switch и метода prompt');
 
-switch (operation) {
-    case '+':
-        res1 = n1 + n2;
-        break;
-    case '-':
-        res1 = n1 - n2;
-        break;
-    case '*':
-        res1 = n1 * n2;
-        break;
-    case '/':
-        res1 = n1 / n2;
-        break;
-}
-console.log(res1);
+    let n1 = +prompt('Введите число');
+    let n2 = +prompt('Введите число');
+    let operation = prompt('Введите - + / или *');
+    let res1;
+
+    switch (operation) {
+        case '+':
+            res1 = n1 + n2;
+            break;
+        case '-':
+            res1 = n1 - n2;
+            break;
+        case '*':
+            res1 = n1 * n2;
+            break;
+        case '/':
+            res1 = n1 / n2;
+            break;
+    }
+    console.log(res1);
 </script>
 </body>
 </html>
