@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+</head>
+<body>
+
+<script>
+// конструкция if
+
+    let a = 12;
+    let b = 6;
+    let c = '*';
+    let res;
+
+    if (c === '+') {
+        res = a + b;
+        console.log(res);
+    }
+    if (c === '-') {
+        res = a - b;
+        console.log(res);
+    }
+    if (c === '*') {
+        res = a * b;
+        console.log(res);
+    }
+    if (c === '/') {
+        res = a / b;
+        console.log(res);
+    }
+
+// конструкция switch
+    let num1 = 18;
+    let num2 = 6;
+    let operator = '/';
+    let result;
+
+    switch (operator) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            result = num1 / num2;
+            break;
+    }
+    console.log(result);
+
+// конструкция switch c использованием метода prompt
+let n1 = +prompt('Введите число');
+let n2 = +prompt('Введите число');
+let operation = prompt('Введите - + / или *');
+let res1;
+
+switch (operation) {
+    case '+':
+        res1 = n1 + n2;
+        break;
+    case '-':
+        res1 = n1 - n2;
+        break;
+    case '*':
+        res1 = n1 * n2;
+        break;
+    case '/':
+        res1 = n1 / n2;
+        break;
+}
+console.log(res1);
+</script>
+</body>
+</html>
