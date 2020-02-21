@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Calculator 2</title>
+    <title>Title</title>
 </head>
 <body>
 <script>
@@ -10,32 +10,45 @@
     let n;
     let operation;
     let isOperator = false;
+    let isFirst = true;
     let log = '';
     while (true) {
         if (isOperator) {
             operation = prompt('Введите - + / * или = для результата');
-            isOperator = false;
             log += operation;
+            if (isFirst) { // one time start
+                res = n;
+                isFirst = false;
+                isOperator = false;
+                if (operation !== '=') {
+                    continue;
+                } else {
+                    break;
+                }
+
+            }
         } else {
             n = +prompt('Введите число');
-            isOperator = true;
             log += n;
         }
-
-        switch (operation) {
-            case '+':
-                res += n;
-                break;
-            case '-':
-                res -= n;
-                break;
-            case '*':
-                res *= n;
-                break;
-            case '/':
-                res /= n;
-                break;
+        if (!isOperator) {
+            switch (operation) {
+                case '+':
+                    res += n;
+                    break;
+                case '-':
+                    res -= n;
+                    break;
+                case '*':
+                    res *= n;
+                    break;
+                case '/':
+                    res /= n;
+                    break;
+            }
         }
+
+        isOperator = !isOperator;
 
         if (operation === '=') {
             break;
@@ -43,6 +56,9 @@
 
     }
     alert(log + res);
+
+
 </script>
 </body>
 </html>
+
