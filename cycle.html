@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    let sumOdd = 0;
+    let sumEven = 0;
+
+    for (i = 0; i < 3; i++) {
+        let a = parseInt(prompt('Enter num'));
+        if (isNaN(a)) {
+            a = 0;
+        }
+        console.log(a);
+        if (a % 2 === 0) {
+            sumOdd += a;
+        } else {
+            sumEven += a;
+        }
+    }
+
+    console.log('сумма четных чисел = ' + sumOdd, 'сумма нечетных чисел = ' + sumEven);
+
+    let sumOdd1 = 0;
+    let sumEven1 = 0;
+
+    for (i = 0; i < 3; i++) {
+        let a = parseInt(prompt('Enter num'));
+        if (isNaN(a)) {
+            a = 0;
+        }
+        console.log(a);
+        if (a % 2 === 0) {
+            sumOdd1++;
+        } else {
+            sumEven1++;
+        }
+    }
+    console.log('количество четных чисел = ' + sumOdd1, 'сколичество нечетных чисел = ' + sumEven1);
+</script>
+</body>
+</html>

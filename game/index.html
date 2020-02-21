@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+</head>
+<body>
+<script>
+    let userName1;
+    let userName2;
+    let shootingLane = 2;
+    let sum = 0;
+    let sum2 = 0;
+    let minShot = 0;
+
+    userName1 = prompt('Enter your name');
+    userName2 = prompt('Enter your name');
+
+    for (let k = 1; k <= shootingLane; k++) {
+        let player1 = prompt(userName1 + ',' + ' enter 5 (amount of shots)', 5);
+        let player2 = prompt(userName2 + ',' + ' enter 5 (amount of shots)', 5);
+        console.log(player1, player2);
+        player1 = parseInt(player1);
+        player2 = parseInt(player2);
+
+        let randomPlayer1 = Math.floor(Math.random() * (player1 - minShot)) + minShot;
+        let randomPlayer2 = Math.floor(Math.random() * (player2 - minShot)) + minShot;
+
+        sum += randomPlayer1;
+        sum2 += randomPlayer2;
+    }
+
+    if (sum > sum2) {
+        alert('Выиграл ' + userName1 + '!' + ' Kоличество очков ' + sum);
+    }
+    if (sum2 > sum) {
+        alert('Выиграл ' + userName2 + '!' + ' Kоличество очков ' + sum2);
+    }
+
+</script>
+</body>
+</html>
