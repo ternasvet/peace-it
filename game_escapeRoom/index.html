@@ -69,9 +69,13 @@
         let min = 1;
         for (j = 1; j <= 3; j++) {
             let shootDice = askUser('Кидайте кубик три раза. Введите цифру 6.');
-            shootDice = parseInt(shootDice);
+            if (shootDice !== null) {
+                shootDice = parseInt(shootDice);
+            } else {
+                shootDice = 1;
+            }
             let randomDice = Math.floor(Math.random() * (shootDice - min)) + min;
-           sum += randomDice;
+            sum += randomDice;
         }
         alert('У вас цифра ' + sum + '.' + ' Это цифры пароля для выхода из комнаты');
 
@@ -79,29 +83,32 @@
     }
 
     function secondDoorLogic() {
-        let question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть нужно отгадать загадку: "В каком числе ' +
-            'столько цифр сколько букв в его названии"(3 попытки)');
-        question2 = parseInt(question2);
-        if (question2 === 100) {
-            let result2 = answerMessage('Дверца сейфа открыта, возьмите из сейфа кубик и противоядие. Продoлжайте игру');
-            if (result2 === true) {
-                let resultOfThrowDice = throwDice();
-                getPassword(resultOfThrowDice);
+        let count = 1;
+        while (true) {
+            let question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть, нужно отгадать загадку: "В каком числе ' +
+                'столько цифр сколько букв в его названии"(3 попытки)');
+            if (question2 === null) {
+                return;
             }
-        }
-        if (question2 !== 100) {
-            let count = 1;
-            while (count <= 3) {
-                question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть, нужно отгадать загадку: "В каком числе ' +
-                    'столько цифр сколько букв в его названии"(3 попытки)');
-                question2 = parseInt(question2);
-                count++;
-            }
-            alert('Ответ 100');
-            secondDoorLogic();
-        }
-    }
+            question2 = parseInt(question2);
 
+            if (question2 === 100) {
+                let result2 = answerMessage('Дверца сейфа открыта, возьмите из сейфа кубик и противоядие. Продoлжайте игру');
+                if (result2 === true) {
+                    let resultOfThrowDice = throwDice();
+                    getPassword(resultOfThrowDice);
+                    return;
+                }
+            }
+
+            if (count >= 3) {
+                break;
+            }
+            count++;
+        }
+        alert('Ответ 100');
+        secondDoorLogic();
+    }
 
     function runGame() {
         let user = askUser('Введите ваше имя');
