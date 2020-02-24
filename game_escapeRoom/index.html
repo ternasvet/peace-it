@@ -6,10 +6,6 @@
 </head>
 <body>
 <script>
-    let user;
-    let min = 1;
-
-    user = prompt('Введите ваше имя');
 
     function askUser(question) {
         return prompt(question);
@@ -20,7 +16,7 @@
     }
 
     function chooseDoor() {
-        let choose = askUser('Вы в комнате. Перед вами двери красная и голубая. Выберите дверь: красная - 1, голубая - 2');
+
         return parseInt(choose);
     }
 
@@ -38,13 +34,13 @@
         }
 
         if (question !== 2) {
-            alert('Вас ранили, вам необходимо противоядие');
+            alert('Ответ неправильный! Вас ранили, вам необходимо противоядие. Пройдите в голубую дверь.');
             secondDoorLogic();
         }
     }
 
     function getPassword(sum) {
-        let escape = askUser('Введите пароль состоящий из ответa кубика');
+        let escape = askUser('Введите пароль, состоящий из ответa кубика');
         escape = parseInt(escape);
 
         if (escape === sum) {
@@ -71,6 +67,7 @@
 
     function throwDice() {
         let sum = 0;
+        let min = 1;
         for (j = 1; j <= 3; j++) {
             let shootDice = askUser('Кидайте кубик три раза. Введите цифру 6.');
             shootDice = parseInt(shootDice);
@@ -96,7 +93,7 @@
         if (question2 !== 100) {
             let count = 1;
             while (count <= 3) {
-                question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть нужно отгадать загадку: "В каком числе ' +
+                question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть, нужно отгадать загадку: "В каком числе ' +
                     'столько цифр сколько букв в его названии"(3 попытки)');
                 question2 = parseInt(question2);
                 count++;
@@ -108,10 +105,19 @@
 
 
     function runGame() {
+        let user = askUser('Введите ваше имя');
+        if (user === null) {
+            return;
+        }
         // game logic
         let choose = 0;
         while (true) {
-            choose = chooseDoor();
+            choose = askUser('Вы в комнате. Перед вами двери красная и голубая. Выберите дверь: красная - 1, голубая - 2');
+            if (choose === null) {
+                return;
+            }
+
+            choose = parseInt(choose);
             if (choose === 1 || choose === 2) {
                 break;
             }
@@ -127,6 +133,8 @@
         if (choose === 2) {
             secondDoorLogic();
         }
+
+        alert('Спасибо за игру ' + user + ' !');
     }
 
     runGame();
