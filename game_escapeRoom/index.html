@@ -54,11 +54,11 @@
 
         if (escape === sum) {
             alert('Поздравляем! Дверь открыта');
-            let escapeGame = answerMessage('Выхотите начать сначала игру?');
+            let escapeGame = answerMessage('Вы хотите начать сначала игру?');
             if(escapeGame === true){
                 chooseDoor();
             }else{
-                false;
+               return false;
             }
         }
         if (escape !== sum) {
@@ -68,11 +68,9 @@
                 let escape = askUser('Введите пароль состоящий из ответa кубика');
                 escape = parseInt(escape);
                 count1++;
-
-
             }
-            alert('Ответ' + sum);
-
+            alert('Ответ ' + sum);
+            getPassword();
         }
     }
 
@@ -108,6 +106,7 @@
                 count++;
             }
             alert('Ответ 100');
+            secondDoorLogic();
         }
     }
 
