@@ -24,7 +24,7 @@
         let question = askUser('Перед вами скелет. Он отпустит вас, если ответите на загадку: "Один кирпич весит 1 кг и еще полкирпича. Сколько весит кирпич?"');
         question = parseInt(question);
         if (question === 2) {
-            let result1 = answerMessage('Угадали, вы проходите дальше, продолжить игру?');
+            let result1 = answerMessage('Угадали! Вы проходите дальше, продолжить игру?');
             if (result1 === true) {
                 secondDoorLogic();
             } else {
@@ -57,6 +57,16 @@
             while (count1 <= 3) {
                 let escape = askUser('Введите пароль состоящий из ответa кубика');
                 escape = parseInt(escape);
+                if (escape === sum) {
+                    alert('Поздравляем! Дверь открыта');
+                    let escapeGame = answerMessage('Вы хотите начать сначала игру?');
+                    if (escapeGame === true) {
+                        runGame();
+                        break;
+                    } else {
+                        return false;
+                    }
+                }
                 count1++;
             }
             alert('Ответ ' + sum);
@@ -86,7 +96,7 @@
         let count = 1;
         while (true) {
             let question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть, нужно отгадать загадку: "В каком числе ' +
-                'столько цифр сколько букв в его названии"(3 попытки)');
+                'столько цифр сколько букв в его названии"(Введите число). У вас 3 попытки.');
             if (question2 === null) {
                 return;
             }
@@ -118,7 +128,7 @@
         // game logic
         let choose = 0;
         while (true) {
-            choose = askUser('Вы в комнате. Перед вами двери красная и голубая. Выберите дверь: красная - 1, голубая - 2');
+            choose = askUser('Вы в комнате. Перед вами двери: красная и голубая. Выберите дверь: красная - 1, голубая - 2');
             if (choose === null) {
                 return;
             }
