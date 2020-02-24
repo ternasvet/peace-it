@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game - "Escape room"</title>
+</head>
+<body>
+<script>
+    let user;
+    let sum = 0;
+    let min = 1;
+
+    user = prompt('Введите ваше имя');
+
+    function askUser(question) {
+        return prompt(question);
+    }
+
+    function answerMessage(message) {
+        return confirm(message);
+    }
+
+    function chooseDoor() {
+        let choose = askUser('Вы в комнате. Перед вами дверь красная и голубая. Выберите дверь: красная - 1, голубая - 2');
+        return parseInt(choose);
+    }
+
+    function firstDoorLogic() {
+        let question = askUser('Перед вами скелет. Он отпустит вас, если ответите на загадку: "Один кирпич весит 1 кг еще полкирпича. Сколько весит кирпич?"'
+            + 'еще полкирпича. Сколько весит кирпич?"');
+        question = parseInt(question);
+        if (question === 2) {
+            let result1 = answerMessage('Угадали, вы проходите дальше, продолжить игру?');
+            if (result1 === true) {
+                secondDoorLogic();
+            } else {
+                return;
+            }
+            //дописать код
+        }
+        if (question !== 2) {
+            let result2 = answerMessage('Вас ранили, вам необходимо противоядие');
+            if (result2 === true) {
+                secondDoorLogic();
+            } else {
+                chooseDoor();
+            }
+        }
+    }
+
+    function getPassword() {
+        let escape = askUser('Введите пароль состоящий из ответa кубика');
+        escape = parseInt(escape);
+
+        if (escape === sum) {
+            alert('Поздравляем! Дверь открыта');
+            let escapeGame = answerMessage('Выхотите начать сначала игру?');
+            if(escapeGame === true){
+                chooseDoor();
+            }else{
+                false;
+            }
+        }
+        if (escape !== sum) {
+            alert('Попытайтесь еще раз. Три попытки');
+            let count1 = 1;
+            while (count1 <= 3) {
+                let escape = askUser('Введите пароль состоящий из ответa кубика');
+                escape = parseInt(escape);
+                count1++;
+
+
+            }
+            alert('Ответ' + sum);
+
+        }
+    }
+
+    function throwDice() {
+        for (j = 1; j <= 3; j++) {
+            let shootDice = askUser('Кидайте кубик три раза. Введите цифру 6.');
+            shootDice = parseInt(shootDice);
+            let randomDice = Math.floor(Math.random() * (shootDice - min)) + min;
+            sum += randomDice;
+
+        }
+        alert('У вас цифра ' + sum + '.' + ' Это цифры пароля для выхода из комнаты');
+    }
+
+    function secondDoorLogic() {
+        // for (i = 0; i <= 3; i++) {
+        let question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть нужно отгадать загадку: "В каком числе ' +
+            'столько цифр сколько букв в его названии"(3 попытки)');
+        question2 = parseInt(question2);
+        if (question2 === 100) {
+            let result2 = answerMessage('Дверца сейфа открыта, возьмите из сейфа кубик и противоядие. Продoлжайте игру');
+            if (result2 === true) {
+                throwDice();
+            }
+            getPassword();
+        }
+        if (question2 !== 100) {
+            let count = 1;
+            while (count <= 3) {
+                question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть нужно отгадать загадку: "В каком числе ' +
+                    'столько цифр сколько букв в его названии"(3 попытки)');
+                question2 = parseInt(question2);
+                count++;
+            }
+            alert('Ответ 100');
+        }
+    }
+
+
+    // game logic
+
+    let choose = chooseDoor();
+
+    if (choose === 1) {
+        firstDoorLogic();
+    }
+
+    if (choose === 2) {
+        secondDoorLogic();
+    }
+    chooseDoor();
+</script>
+</body>
+</html>
