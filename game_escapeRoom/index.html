@@ -7,7 +7,6 @@
 <body>
 <script>
     let user;
-    let sum = 0;
     let min = 1;
 
     user = prompt('Введите ваше имя');
@@ -42,7 +41,6 @@
             alert('Вас ранили, вам необходимо противоядие');
             secondDoorLogic();
         }
-
     }
 
     function getPassword(sum) {
@@ -67,17 +65,17 @@
                 count1++;
             }
             alert('Ответ ' + sum);
-            getPassword();
+            getPassword(sum);
         }
     }
 
     function throwDice() {
+        let sum = 0;
         for (j = 1; j <= 3; j++) {
             let shootDice = askUser('Кидайте кубик три раза. Введите цифру 6.');
             shootDice = parseInt(shootDice);
             let randomDice = Math.floor(Math.random() * (shootDice - min)) + min;
-            sum += randomDice;
-
+           sum += randomDice;
         }
         alert('У вас цифра ' + sum + '.' + ' Это цифры пароля для выхода из комнаты');
 
@@ -85,15 +83,14 @@
     }
 
     function secondDoorLogic() {
-        // for (i = 0; i <= 3; i++) {
         let question2 = askUser('В голубой комнате находится сейф.Чтобы его открыть нужно отгадать загадку: "В каком числе ' +
             'столько цифр сколько букв в его названии"(3 попытки)');
         question2 = parseInt(question2);
         if (question2 === 100) {
             let result2 = answerMessage('Дверца сейфа открыта, возьмите из сейфа кубик и противоядие. Продoлжайте игру');
             if (result2 === true) {
-                let sum = throwDice();
-                getPassword(sum);
+                let resultOfThrowDice = throwDice();
+                getPassword(resultOfThrowDice);
             }
         }
         if (question2 !== 100) {
