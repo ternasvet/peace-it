@@ -21,7 +21,7 @@
     }
 
     function chooseDoor() {
-        let choose = askUser('Вы в комнате. Перед вами дверь красная и голубая. Выберите дверь: красная - 1, голубая - 2');
+        let choose = askUser('Вы в комнате. Перед вами двери красная и голубая. Выберите дверь: красная - 1, голубая - 2');
         return parseInt(choose);
     }
 
@@ -36,29 +36,26 @@
             } else {
                 return;
             }
-            //дописать код
         }
+
         if (question !== 2) {
-            let result2 = answerMessage('Вас ранили, вам необходимо противоядие');
-            if (result2 === true) {
-                secondDoorLogic();
-            } else {
-                chooseDoor();
-            }
+            alert('Вас ранили, вам необходимо противоядие');
+            secondDoorLogic();
         }
+
     }
 
-    function getPassword() {
+    function getPassword(sum) {
         let escape = askUser('Введите пароль состоящий из ответa кубика');
         escape = parseInt(escape);
 
         if (escape === sum) {
             alert('Поздравляем! Дверь открыта');
             let escapeGame = answerMessage('Вы хотите начать сначала игру?');
-            if(escapeGame === true){
-                chooseDoor();
-            }else{
-               return false;
+            if (escapeGame === true) {
+                runGame();
+            } else {
+                return false;
             }
         }
         if (escape !== sum) {
@@ -83,6 +80,8 @@
 
         }
         alert('У вас цифра ' + sum + '.' + ' Это цифры пароля для выхода из комнаты');
+
+        return sum;
     }
 
     function secondDoorLogic() {
@@ -93,9 +92,9 @@
         if (question2 === 100) {
             let result2 = answerMessage('Дверца сейфа открыта, возьмите из сейфа кубик и противоядие. Продoлжайте игру');
             if (result2 === true) {
-                throwDice();
+                let sum = throwDice();
+                getPassword(sum);
             }
-            getPassword();
         }
         if (question2 !== 100) {
             let count = 1;
@@ -111,18 +110,31 @@
     }
 
 
-    // game logic
+    function runGame() {
+        // game logic
+        let choose = 0;
+        while (true) {
+            choose = chooseDoor();
+            if (choose === 1 || choose === 2) {
+                break;
+            }
 
-    let choose = chooseDoor();
+            alert('Выберите дверь под номером 1 или 2');
 
-    if (choose === 1) {
-        firstDoorLogic();
+        }
+
+        if (choose === 1) {
+            firstDoorLogic();
+        }
+
+        if (choose === 2) {
+            secondDoorLogic();
+        }
     }
 
-    if (choose === 2) {
-        secondDoorLogic();
-    }
-    chooseDoor();
+    runGame();
+
+
 </script>
 </body>
 </html>
