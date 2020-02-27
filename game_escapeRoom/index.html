@@ -6,7 +6,7 @@
 </head>
 <body>
 <script>
-
+    let catalogHynday = [];
     function askUser(question) {
         return prompt(question);
     }
@@ -48,7 +48,7 @@
             if (escapeGame === true) {
                 runGame();
             } else {
-                return false;
+                return;
             }
         }
         if (escape !== sum) {
@@ -64,7 +64,7 @@
                         runGame();
                         break;
                     } else {
-                        return false;
+                        return;
                     }
                 }
                 count1++;
@@ -132,7 +132,6 @@
             if (choose === null) {
                 return;
             }
-
             choose = parseInt(choose);
             if (choose === 1 || choose === 2) {
                 break;

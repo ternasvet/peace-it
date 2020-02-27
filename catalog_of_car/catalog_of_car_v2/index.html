@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>catalog_of_car_v2</title>
+</head>
+<body>
+<script>
+    let arrCatalog = [];
+
+    function pref(arr) {
+        let newArr = [];
+        for (i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+        return newArr;
+    }
+
+    function addElement(arr, value) {
+        let newArr = pref(arr);
+        newArr[arr.length] = value;
+        return newArr;
+    }
+
+    function find(arr, value) {
+        for (i = 0; i < arr.length; i++) {
+            if (arr[i] === value) {
+                return i
+            }
+        }
+        return -1;
+    }
+
+    function replace(arr, value1, value2) {
+        let newArr = pref(arr);
+        let index = find(arr, value1);
+        if (index !== -1) {
+            newArr[index] = value2
+        } else {
+            alert('404');
+            runCatalog();
+        }
+        return newArr;
+    }
+
+    function showElement(arr) {
+        alert('Весь массив: ', arr);
+        alert('Количество элементов: ' + arr.length);
+    }
+
+    function fillHyanday() {
+        let catalogHynday = [];
+        alert('Вводите модели Hyunday');
+        while (true) {
+            let model = prompt('Добавьте модель Hyunday в каталог, когда закончите нажмите отмена');
+            if (model === null) {
+                break;
+            }
+            if (model === '') {
+                alert('Введите модель');
+                continue;
+            }
+
+            catalogHynday = addElement(catalogHynday, model);
+            console.log(catalogHynday);
+
+        }
+
+        let error = confirm('Если вы где-то ошиблись, выберите ок для правки. Потом введите модель которую хотите заменить, а потом НА КОТОРУЮ хотите заменить')
+        if (error) {
+            while (true) {
+                let model1 = prompt('Название модели которую меняем');
+                if (model1 === null) break;
+                let model2 = prompt('Название модели НА которую меняем');
+                if (model2 === null) break;
+
+                catalogHynday = replace(catalogHynday, model1, model2);
+                console.log( catalogHynday);
+                console.log('Замена проведена - новый каталог');
+                showElement(catalogHynday);
+
+            }
+
+
+        }
+    }
+
+    function runCatalog() {
+        let askUser = prompt('Ввыберите команду: 1 - добавить модель Hyunday, 2 - обновить каталог, 3 - показать количество добавленных моделей');
+        let choiceValue = parseInt(askUser);
+        if (askUser === null) {
+            return;
+        }
+
+        let newArr = [];
+
+        if (choiceValue === 1) {
+            fillHyanday();
+
+        }
+
+        if (choiceValue === 3) {
+            showElement();
+        }
+
+    }
+
+    runCatalog();
+</script>
+</body>
+</html>

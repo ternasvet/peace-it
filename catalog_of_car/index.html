@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог моделей Hyunday</title>
+</head>
+<body>
+<script>
+    let catalogHynday = [];
+
+    function copy(arr) {
+        let newArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+        return newArr;
+    }
+
+    function add(arr, value) {
+        let newArr = copy(arr);
+        arr[arr.length] = value;
+        console.log(arr);
+        return newArr;
+    }
+
+
+    function find(arr, value) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === value) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    function replace(arr, value1, value2) {
+//     let newArr = copy(arr);
+
+        let index = find(arr, value1);
+        if (index !== -1) {
+            arr[index] = value2;
+        } else {
+            console.log('нет такого значения');
+        }
+
+//     return newArr;
+    }
+
+    function show(arr) {
+        console.log('Наш массив', arr);
+        console.log('Количество элементов: ' + arr.length);
+    }
+
+    // function addNew(arr) {
+    //     let newarr = [];
+    //     for (i = 0; i < arr.length; i++) {
+    //         newarr[i] = arr[i];
+    //     }
+    //     return newarr;
+    // }
+    //
+    //
+    // function addElem(arr, value) {
+    //     let newArr = addNew(arr);
+    //     newArr[arr.length] = value;
+    //     return newArr;
+    // }
+    //
+    // function find(arr, value) {
+    //     for (let i = 0; i < arr.length; i++) {
+    //         if (arr[i] === value) {
+    //             return i;
+    //         }
+    //     }
+    //     return -1;
+    // }
+    //
+    //
+    // function replace(arr, value1, value2) {
+    //     let newArr = copy(arr);
+    //
+    //     let index = find(arr, value1);
+    //     if (index !== -1) {
+    //         newArr[index] = value2;
+    //     } else {
+    //         console.log('нет такого значения');
+    //     }
+    //
+    //     return newArr;
+    // }
+    //
+    // function show(arr) {
+    //     console.log('Наш массив', arr);
+    //     console.log('Количество элементов: ' + arr.length);
+    // }
+    //
+
+    //
+    function runCatalog() {
+        //for (i =)
+             let askUser = prompt('Ввыберите команду: 1 - добавить модель Hyunday, 2 - обновить каталог, 3 - показать количество добавленных моделей');
+        let choiceValue = parseInt(askUser);
+
+        // if (askUser === null) {
+        //     return;
+        // }
+        let hyundaiModels = [];
+        if (choiceValue === 1) {
+            hyundaiModels = addModelHyunday();
+
+        }
+        if (choiceValue === 3) {
+            show(hyundaiModels);
+        }
+
+    }
+
+    runCatalog();
+
+    //
+    function addModelHyunday() {
+        let arrCatalog = [];
+        while (true) {
+            let addCatalog = prompt('Добавьте модель Hyunday в каталог, когда закончите нажмите отмена');
+            if (addCatalog === null) {
+                break;
+            }
+            if(addCatalog === '') {
+                alert('Вы ввели неверное значение');
+            }
+            arrCatalog = addElem(arrCatalog, addCatalog);
+        }
+
+        return arrCatalog;
+    }
+
+    //
+    // function showAmountElements() {
+    //         getAddModel();
+    //         alert(arrCatalog + ' ');
+    //         getCatalog();
+    // }
+    //
+    // function getCompair() {
+    //
+    // }
+    //
+    // //
+    // // function getUpdate() {
+    // //
+    // // }
+    // //
+    // function getAddModel(arr, value) {
+    //     arr[arr.length] = value;
+    //     return arr;
+    // }
+    //
+    //
+    // let test = [];
+    // test = getAddModel(test, 'asdf');
+    //
+    // console.log(test);
+
+</script>
+</body>
+</html>
