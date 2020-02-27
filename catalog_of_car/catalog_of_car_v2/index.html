@@ -37,7 +37,6 @@
             newArr[index] = value2
         } else {
             alert('404');
-            runCatalog();
         }
         return newArr;
     }
@@ -51,8 +50,10 @@
         let catalogHynday = [];
         while (true) {
             let model = prompt('Добавьте модель Hyunday в каталог, когда закончите нажмите отмена');
-            if ( model === catalogHynday) {
+
+            if (find(catalogHynday, model) !== -1) {
                 alert('Такое значение уже есть');
+                continue;
             }
             if (model === null) {
                 break;
@@ -88,7 +89,7 @@
         return catalogHynday;
     }
 
-   // runCatalog();
+    // runCatalog();
 
     function runCatalog() {
 
