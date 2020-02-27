@@ -6,7 +6,6 @@
 </head>
 <body>
 <script>
-    let arrCatalog = [];
 
     function pref(arr) {
         let newArr = [];
@@ -50,9 +49,11 @@
 
     function fillHyanday() {
         let catalogHynday = [];
-        alert('Вводите модели Hyunday');
         while (true) {
             let model = prompt('Добавьте модель Hyunday в каталог, когда закончите нажмите отмена');
+            if ( model === catalogHynday) {
+                alert('Такое значение уже есть');
+            }
             if (model === null) {
                 break;
             }
@@ -60,7 +61,6 @@
                 alert('Введите модель');
                 continue;
             }
-
             catalogHynday = addElement(catalogHynday, model);
             console.log(catalogHynday);
 
@@ -78,27 +78,23 @@
                 console.log(catalogHynday);
                 console.log('Замена проведена - новый каталог');
                 showElement(catalogHynday);
+                let escape = confirm('Выйти из программы?');
+                if (escape === true) {
+                    break;
+                }
             }
         }
+
+        return catalogHynday;
     }
 
+   // runCatalog();
+
     function runCatalog() {
-        let askUser = prompt('Ввыберите команду: 1 - добавить модель Hyunday, 2 - обновить каталог, 3 - показать количество добавленных моделей');
-        let choiceValue = parseInt(askUser);
-        if (askUser === null) {
-            return;
-        }
 
-        let newArr = [];
+        let newArr = fillHyanday();
 
-        if (choiceValue === 1) {
-            fillHyanday();
-
-        }
-
-        if (choiceValue === 3) {
-            showElement();
-        }
+        showElement(newArr);
 
     }
 
