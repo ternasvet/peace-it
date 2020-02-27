@@ -55,7 +55,7 @@
                 alert('Такое значение уже есть');
                 continue;
             }
-            if (model === null) {
+            if (!model) {
                 break;
             }
             if (model === '') {
@@ -70,16 +70,16 @@
         if (error) {
             while (true) {
                 let model1 = prompt('Название модели которую меняем');
-                if (model1 === null) break;
+                if (!model1) break;
                 let model2 = prompt('Название модели НА которую меняем');
-                if (model2 === null) break;
+                if (!model2) break;
 
                 catalogHynday = replace(catalogHynday, model1, model2);
                 console.log(catalogHynday);
                 console.log('Замена проведена - новый каталог');
                 showElement(catalogHynday);
                 let escape = confirm('Выйти из программы?');
-                if (escape === true) {
+                if (escape) {
                     break;
                 }
             }
