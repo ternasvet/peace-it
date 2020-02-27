@@ -44,7 +44,7 @@
     }
 
     function showElement(arr) {
-        alert('Весь массив: ', arr);
+        alert('Весь массив: ' + arr);
         alert('Количество элементов: ' + arr.length);
     }
 
@@ -75,13 +75,10 @@
                 if (model2 === null) break;
 
                 catalogHynday = replace(catalogHynday, model1, model2);
-                console.log( catalogHynday);
+                console.log(catalogHynday);
                 console.log('Замена проведена - новый каталог');
                 showElement(catalogHynday);
-
             }
-
-
         }
     }
 
