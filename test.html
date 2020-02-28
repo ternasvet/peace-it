@@ -54,6 +54,143 @@
     // //reversArr(unic(arr));
     // console.log(reversArr(unic(arr)));
 
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>catalog_of_car_v2</title>
+        </head>
+        <body>
+        <script>
+
+        function pref(arr) {
+            let newArr = [];
+            for (i = 0; i < arr.length; i++) {
+                newArr[i] = arr[i];
+            }
+            return newArr;
+        }
+
+    function addElement(arr, value) {
+        let newArr = pref(arr);
+        newArr[arr.length] = value;
+        return newArr;
+    }
+
+    function find(arr, value) {
+        for (i = 0; i < arr.length; i++) {
+            if (arr[i] === value) {
+                return i
+            }
+        }
+        return -1;
+    }
+
+    function replace(arr, value1, value2) {
+        let newArr = pref(arr);
+        let index = find(arr, value1);
+        if (index !== -1) {
+            newArr[index] = value2
+        } else {
+            alert('404');
+        }
+        return newArr;
+    }
+
+
+
+    function showElement(arr) {
+        alert('Весь массив: ' + arr);
+        alert('Количество элементов: ' + arr.length);
+    }
+
+    function fillHyanday() {
+        let catalogHynday = [];
+        while (true) {
+            let model = prompt('Добавьте модель Hyunday в каталог, когда закончите нажмите отмена');
+
+            if (find(catalogHynday, model) !== -1) {
+                alert('Такое значение уже есть');
+                continue;
+            }
+            if (!model) {
+                break;
+            }
+            if (model === '') {
+                alert('Введите модель');
+                continue;
+            }
+            catalogHynday = addElement(catalogHynday, model);
+            console.log(catalogHynday);
+        }
+
+        let error = confirm('Если вы где-то ошиблись, выберите ок для правки. Потом введите модель которую хотите заменить, а потом НА КОТОРУЮ хотите заменить')
+        if (error) {
+            while (true) {
+                let model1 = prompt('Название модели которую меняем');
+                if (!model1) break;
+                let model2 = prompt('Название модели НА которую меняем');
+                if (!model2) break;
+
+                catalogHynday = replace(catalogHynday, model1, model2);
+                console.log(catalogHynday);
+                console.log('Замена проведена - новый каталог');
+                showElement(catalogHynday);
+                let escape = confirm('Выйти из программы?');
+                if (escape) {
+                    break;
+                }
+            }
+        }
+
+        return catalogHynday;
+    }
+
+    function runCatalog() {
+        let newArr = fillHyanday();
+        showElement(newArr);
+    }
+
+    runCatalog();
+
+
+    // let arr = [1, 3];
+    // function unshift1 (param){
+    // let newArr = [];
+
+    // for (i = 0; i < arr.length; i++){
+    // 	newArr[i + 1] = arr[i];
+
+    // }
+    //     arr = newArr;
+
+    // }
+    // unshift1(4);
+    // console.log(arr);
+    //     let arr = [1,2,3,4,5,6];
+    // function f2(start, end, replace){
+    // 	let arrNew = [];
+    // 	var deleted = start + end;
+    // 	//let replace = start;
+    // 	for (i = 0; i < arr.length; i++){
+    // 	   if(i <= start){
+    // 	   arrNew[i] = arr[i];
+    // 		}
+    // 		if(i > deleted){
+    // 			arrNew[i - end ] = arr[i];
+    // 		}
+    // 		if(i >= start && i < deleted ){
+    // 		    arrNew[i ] = replace;
+    // 		}
+    // 	}
+    // 	 arr = arrNew;
+    // }
+
+
+    //  f2(2, 2, 45);
+
+    // console.log(arr);
+
 </script>
 </body>
 </html>
