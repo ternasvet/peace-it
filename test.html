@@ -6,83 +6,53 @@
 </head>
 <body>
 <script>
-    let catalogHyundai = [];
+
+    arr2 = [1, 4, 3, 4, 2];
 
 
-    // function copy(arr) {
-    //     let newArr = [];
+    // function sumOddArr(arr) {
+    //     let sum = 0;
     //     for (let i = 0; i < arr.length; i++) {
-    //         newArr[i] = arr[i];
+    //         if (arr[i] % 2 === 0) {
+    //             sum += arr[i];
+    //         }
+    //
     //     }
-    //     return newArr;
+    //     return sum;
     // }
 
-    function add(arr, value) {
-        let newArr = [];
-        for (let i = 0; i < arr.length; i++) {
-            newArr[i] = arr[i];
+    //console.log(sumOddArr(arr2));
 
-        }
-        //let arre = f
-        arr[newArr.length] = value;
-        console.log(arr);
-        return arr;
-    }
-    //console.log(newArr);
 
-    function find(arr, value) {
+    function increaseArr(arr) {
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i] === value) {
-                return i;
+            for (let j = 0; j < arr.length; j++) {
+                if (arr[i] < arr[j]) {
+                    let increase = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = increase;
+                }
             }
         }
-        return -1;
+        return arr;
     }
 
-    function replace(arr, value1, value2) {
-//     let newArr = copy(arr);
+    console.log(increaseArr(arr2));
 
-        let index = find(arr, value1);
-        if (index !== -1) {
-            arr[index] = value2;
-        } else {
-            console.log('нет такого значения');
-        }
-
-//     return newArr;
-    }
-
-    function show(arr) {
-        console.log('Наш массив', arr);
-        console.log('Количество элементов: ' + arr.length);
-    }
-
-    alert('Вводите модели Hyundai которые вы знаете, как закончите нажмите отмена');
-
-    while(true) {
-        let model = prompt('Название модели');
-        if(model === null) break;
-
-        add(catalogHyundai, model);
-        console.log(add);
-    }
-
-    show(catalogHyundai);
-
-    if(confirm('Если вы где-то ошиблись, выберите ок для правки. Потом введите модель которую хотите заменить, а потом НА КОТОРУЮ хотите заменить')) {
-        while(true) {
-            let model1 = prompt('Название модели которую меняем');
-            if(model1 === null) break;
-            let model2 = prompt('Название модели НА которую меняем');
-            if(model2 === null) break;
-
-            replace(catalogHyundai, model1, model2);
-            console.log('Замена проведена - новый каталог');
-            show(catalogHyundai);
-        }
-    }
-
-    show(catalogHyundai);
+    //
+    // for (let i = e.length - 1; i >= 0; i--) {
+    //     innerText14.innerHTML += e[i] + ' ';
+    //  }
+    // function reversArr(arr) {
+    //     //let newArr = [];
+    //     for (let i = arr.length - 1; i >= 0; i--) {
+    //         return arr[i];
+    //     }
+    //
+    //     //return newArr;
+    // }
+    // //reversArr(unic(arr));
+    // console.log(reversArr(unic(arr)));
 
 </script>
 </body>
