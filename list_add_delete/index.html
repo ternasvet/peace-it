@@ -14,11 +14,6 @@
         let users = ['Петров', 'Рогов', 'Игнатов', 'Ковальов'];
         alert(users);
         while (true) {
-            /**
-             * Спросить пользователя про действие?
-             * Написать switch case для выполнения действия
-             * выйти из выполнения
-             */
             let action = getAction();
             switch (action) {
                 case 1:
@@ -49,11 +44,15 @@
         }
     }
 
+    //Функция действия
+
     function getAction() {
         let choose = prompt('Выберите действие: 1 - удалить; 2 - добавить; 3 - показать все; 4 - выйти');
         // тут надо добавить проверку если введеное число отличатеся от возможных вариантов ввода
         return parseInt(choose);
     }
+
+    //Функция добавления имен
 
     function addName(arr, value) {
         let index = find(arr, value);
