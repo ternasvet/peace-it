@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<script>
+    /**
+     * Данная функция является основной точкой входа в приложение.
+     * Вся логика реализуется в этой функции
+     */
+    function main() {
+        let users = ['Петров', 'Рогов', 'Игнатов', 'Ковальов'];
+
+        while (true) {
+            /**
+             * Спросить пользователя про действие?
+             * Написать switch case для выполнения действия
+             * выйти из выполнения
+             */
+            let action = getAction();
+            switch (action) {
+                case 1:
+                    // delete;
+                    deleteLoop(users);
+                    break;
+                case 2:
+                    // add
+                    addName(users);
+                    break;
+                case 3:
+                    // show
+                    showName(users);
+                    break;
+                case 4:
+                    // exit
+                    return;
+                //break;
+                default:
+                    if(!action) {
+                        return;
+                    }
+                    if (confirm('Неправильно введенная команда, выйти?')) {
+                        return;
+                    }
+
+            }
+        }
+    }
+
+    function getAction() {
+        let choose = prompt('Выберите действие: 1 - удалить; 2 - добавить; 3 - показать все; 4 - выйти');
+        // тут надо добавить проверку если введеное число отличатеся от возможных вариантов ввода
+        return parseInt(choose);
+    }
+
+    function run() {
+
+        function action() {
+            let name = ['Петров', 'Рогов', 'Игнатов', 'Ковальов'];
+            alert(name);
+            let choose = prompt('Выберите действие: 1 - удалить; 2 - показать все; 3 - выйти; 4 - добавить');
+            choose = parseInt(choose);
+            if (choose === 1) {
+                deleteName(name);
+
+            }
+            if (choose === 2) {
+                let show = elseDeleteName(arr);
+                showName(show);
+            }
+
+        }
+
+        action();
+    }
+
+    function addName(arr) {
+        let name = prompt('Введите имя для добавления или отмена для выхода');
+        // todo: добавить проверку на случай если имя кривое например пустая строка
+        if (name !== null) {
+            let index = find(arr, name);
+            if (index === -1) {
+                arr.push(name);
+            } else {
+                alert('Такое имя уже существует');
+                return addName(arr);
+            }
+
+        }
+        return arr;
+    }
+
+    function addName(arr)
+
+
+    //поиск индекса
+    function find(arr, value) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === value) {
+                return i
+            }
+        }
+        return -1;
+    }
+
+    function deleteName(arr, name) {
+        let index = find(arr, name);
+        if (index !== -1) {
+            arr.splice(index, 1);
+        } else {
+            alert('Такого имени нет');
+        }
+        return arr;
+    }
+
+
+    function deleteLoop(arr) {
+        while (true) {
+            let question = prompt('Введите имя для удаления или отмена для выхода');
+            if (question === null) {
+                return arr;
+            }
+            arr = deleteName(arr, question);
+        }
+    }
+
+    function showName(arr) {
+        alert('Список всех имен: ' + arr);
+    }
+
+    main();
+</script>
+</body>
+</html>
