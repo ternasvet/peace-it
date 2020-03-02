@@ -18,11 +18,11 @@
             switch (action) {
                 case 1:
                     // delete;
-                    deleteLoop(users);
+                    users = deleteLoop(users);
                     break;
                 case 2:
                     // add
-                    addNameLoop(users);
+                    users = addNameLoop(users);
                     break;
                 case 3:
                     // show
@@ -32,14 +32,6 @@
                     // exit
                     return;
                 // как корректнее return или break?;
-                default:
-                    if (confirm('Введите 1 - удалить, 2 - добавить, 3 -показать все или 4 - для выхода, выйти?')) {
-                        return;
-                    }
-                    // Почему не срабатывает?
-                    if (!action) {
-                        break;
-                    }
             }
         }
     }
@@ -47,10 +39,19 @@
     //Функция действия
 
     function getAction() {
-        let choose = prompt('Выберите действие: 1 - удалить; 2 - добавить; 3 - показать все; 4 - выйти');
-        // тут надо добавить проверку если введеное число отличатеся от возможных вариантов ввода
-        return parseInt(choose);
+        let choose = 0;
+        while (true) {
+            choose = prompt('Выберите действие: 1 - удалить; 2 - добавить; 3 - показать все; 4 - выйти');
+            choose = parseInt(choose);
+            // тут проверка, если введеное число отличается от возможных вариантов ввода
+            if (choose === 1 || choose === 2 || choose === 3 || choose === 4) {
+                break;
+            }
+            alert('Введите 1 - удалить, 2 - добавить, 3 - показать все или 4 - для выхода');
+        }
+        return choose;
     }
+
 
     //Функция добавления имен
 
@@ -58,6 +59,7 @@
         let index = find(arr, value);
         if (index === -1) {
             arr.push(value);
+            alert(value + ' успешно добавлен');
         } else {
             alert('Такое имя уже существует');
         }
@@ -72,14 +74,14 @@
             if (name === null) {
                 break;
             }
-            if (name !== '') {
-                arr = addName(arr, name);
-            }
             if (name === '') {
-                alert('Введите имя');
-                return addNameLoop(arr);
+                alert('Ошибка: Пустое имя нельзя добавить');
+                continue;
             }
+
+            arr = addName(arr, name);
         }
+        return arr;
     }
 
     //Поиск индекса
@@ -99,6 +101,7 @@
         let index = find(arr, name);
         if (index !== -1) {
             arr.splice(index, 1);
+            alert(name + ' успешно удален');
         } else {
             alert('Такого имени нет');
         }
@@ -116,11 +119,13 @@
             }
             if (question === '') {
                 alert('Введите имя');
-                return deleteLoop(arr);
-                // или continue ?;
+                continue;
             }
+
             arr = deleteName(arr, question);
         }
+
+        return arr;
     }
 
     // Обновляемый список удаленных и добавленных имен
