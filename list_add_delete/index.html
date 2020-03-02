@@ -12,7 +12,7 @@
      */
     function main() {
         let users = ['Петров', 'Рогов', 'Игнатов', 'Ковальов'];
-
+        alert(users);
         while (true) {
             /**
              * Спросить пользователя про действие?
@@ -27,7 +27,7 @@
                     break;
                 case 2:
                     // add
-                    addName(users);
+                    addNameLoop(users);
                     break;
                 case 3:
                     // show
@@ -36,15 +36,15 @@
                 case 4:
                     // exit
                     return;
-                //break;
+                // как корректнее return или break?;
                 default:
-                    if(!action) {
+                    if (confirm('Введите 1 - удалить, 2 - добавить, 3 -показать все или 4 - для выхода, выйти?')) {
                         return;
                     }
-                    if (confirm('Неправильно введенная команда, выйти?')) {
-                        return;
+                    // Почему не срабатывает?
+                    if (!action) {
+                        break;
                     }
-
             }
         }
     }
@@ -55,47 +55,36 @@
         return parseInt(choose);
     }
 
-    function run() {
-
-        function action() {
-            let name = ['Петров', 'Рогов', 'Игнатов', 'Ковальов'];
-            alert(name);
-            let choose = prompt('Выберите действие: 1 - удалить; 2 - показать все; 3 - выйти; 4 - добавить');
-            choose = parseInt(choose);
-            if (choose === 1) {
-                deleteName(name);
-
-            }
-            if (choose === 2) {
-                let show = elseDeleteName(arr);
-                showName(show);
-            }
-
-        }
-
-        action();
-    }
-
-    function addName(arr) {
-        let name = prompt('Введите имя для добавления или отмена для выхода');
-        // todo: добавить проверку на случай если имя кривое например пустая строка
-        if (name !== null) {
-            let index = find(arr, name);
-            if (index === -1) {
-                arr.push(name);
-            } else {
-                alert('Такое имя уже существует');
-                return addName(arr);
-            }
-
+    function addName(arr, value) {
+        let index = find(arr, value);
+        if (index === -1) {
+            arr.push(value);
+        } else {
+            alert('Такое имя уже существует');
         }
         return arr;
     }
 
-    function addName(arr)
+    //Функция цикл для повторного добавления имен
+    function addNameLoop(arr) {
+        while (true) {
+            let name = prompt('Введите имя для добавления или отмена для выхода');
+            //если вместо name === null  - !name  не работает выход из функции
+            if (name === null) {
+                break;
+            }
+            if (name !== '') {
+                arr = addName(arr, name);
+            }
+            if (name === '') {
+                alert('Введите имя');
+                return addNameLoop(arr);
+            }
+        }
+    }
 
+    //Поиск индекса
 
-    //поиск индекса
     function find(arr, value) {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === value) {
@@ -104,6 +93,8 @@
         }
         return -1;
     }
+
+    // Функция удаления имен
 
     function deleteName(arr, name) {
         let index = find(arr, name);
@@ -115,16 +106,25 @@
         return arr;
     }
 
+    // Цикл для повторных удалений имен
 
     function deleteLoop(arr) {
         while (true) {
             let question = prompt('Введите имя для удаления или отмена для выхода');
+            //если !question - не работает выход из цикла
             if (question === null) {
-                return arr;
+                break;
+            }
+            if (question === '') {
+                alert('Введите имя');
+                return deleteLoop(arr);
+                // или continue ?;
             }
             arr = deleteName(arr, question);
         }
     }
+
+    // Обновляемый список удаленных и добавленных имен
 
     function showName(arr) {
         alert('Список всех имен: ' + arr);
