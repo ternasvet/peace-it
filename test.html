@@ -2,220 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Каталог моделей Hyunday</title>
+    <title>Title</title>
 </head>
 <body>
 <script>
+    var array = [1, 2, 3, 7, 1, 9, 4, 10, 15, 16, 25, 2];
+    console.log(array);
 
-    // arr2 = [1, 4, 3, 4, 2];
-
-
-    // function sumOddArr(arr) {
-    //     let sum = 0;
-    //     for (let i = 0; i < arr.length; i++) {
-    //         if (arr[i] % 2 === 0) {
-    //             sum += arr[i];
-    //         }
-    //
-    //     }
-    //     return sum;
-    // }
-
-    //console.log(sumOddArr(arr2));
-
-
-    // function increaseArr(arr) {
-    //     for (let i = 0; i < arr.length; i++) {
-    //         for (let j = 0; j < arr.length; j++) {
-    //             if (arr[i] < arr[j]) {
-    //                 let increase = arr[i];
-    //                 arr[i] = arr[j];
-    //                 arr[j] = increase;
-    //             }
-    //         }
-    //     }
-    //     return arr;
-    // }
-    //
-    // console.log(increaseArr(arr2));
-    let arr = [1, 2, 3, 4, 5, 6, 8];
-
-    function f2(start, end, replace) {
-        let arrNew = [];
-
-        for (i = start; i < end; i++) {
-            if (i > start) {
-                arrNew[i] = arr[i];
-            }
-
-            // if (i <= start &&  i > deleted) {
-            //     console.log(i);
-            //     arrNew[i] = replace;
-            //
-            // }
-            //
-
-            //}
+    function getValue() {
+        var value = prompt('ENTER VALUE "1"-DELETED,"2"-VIEW-ARRAY,"3"-Finish,"4"-ADD-ARRAY');
+        value = parseInt(value);
+        switch (value) {
+            case 1:
+                deleteValueArray(array);
+                break;
+            case 2:
+                showArray(array);
+                break;
+            case 3:
+                end();
+                break;
+            case 4:
+                addArray(array);
+                break;
+            default:
+                alert('error');
+                break;
         }
-        arr = arrNew;
     }
 
-    f2(2);
+    function deleteValueArray(arr) {
+        var value = prompt('value');
+        value = parseInt(value);
+        if (arr.indexOf(value) !== -1) {
+            arr.splice(arr.indexOf(value), 1);
+            console.log(arr)
+        }
+        var result = confirm('Еще кого-то?');
+        if (result) {
+            deleteValueArray(arr);
+            console.log(arr)
+        } else {
+            var confirmEnd = confirm('Точно?');
+            if (confirmEnd) {
+                getValue()
+            } else {
+                deleteValueArray(arr)
+            }
+        }
+    }
 
-    console.log(arr);
+    function end() {
+        alert('end')
+    }
 
-    //
-    // for (let i = e.length - 1; i >= 0; i--) {
-    //     innerText14.innerHTML += e[i] + ' ';
-    //  }
-    // function reversArr(arr) {
-    //     //let newArr = [];
-    //     for (let i = arr.length - 1; i >= 0; i--) {
-    //         return arr[i];
-    //     }
-    //
-    //     //return newArr;
-    // }
-    // //reversArr(unic(arr));
-    // console.log(reversArr(unic(arr)));
-    //
-    // <!DOCTYPE html>
-    // <html lang="en">
-    //     <head>
-    //     <meta charset="UTF-8">
-    //     <title>catalog_of_car_v2</title>
-    //     </head>
-    //     <body>
-    //     <script>
-    //
-    //     function pref(arr) {
-    //         let newArr = [];
-    //         for (i = 0; i < arr.length; i++) {
-    //             newArr[i] = arr[i];
-    //         }
-    //         return newArr;
-    //     }
-    //
-    // function addElement(arr, value) {
-    //     let newArr = pref(arr);
-    //     newArr[arr.length] = value;
-    //     return newArr;
-    // }
-    //
-    // function find(arr, value) {
-    //     for (i = 0; i < arr.length; i++) {
-    //         if (arr[i] === value) {
-    //             return i
-    //         }
-    //     }
-    //     return -1;
-    // }
-    //
-    // function replace(arr, value1, value2) {
-    //     let newArr = pref(arr);
-    //     let index = find(arr, value1);
-    //     if (index !== -1) {
-    //         newArr[index] = value2
-    //     } else {
-    //         alert('404');
-    //     }
-    //     return newArr;
-    // }
-    //
-    //
-    //
-    // function showElement(arr) {
-    //     alert('Весь массив: ' + arr);
-    //     alert('Количество элементов: ' + arr.length);
-    // }
-    //
-    // function fillHyanday() {
-    //     let catalogHynday = [];
-    //     while (true) {
-    //         let model = prompt('Добавьте модель Hyunday в каталог, когда закончите нажмите отмена');
-    //
-    //         if (find(catalogHynday, model) !== -1) {
-    //             alert('Такое значение уже есть');
-    //             continue;
-    //         }
-    //         if (!model) {
-    //             break;
-    //         }
-    //         if (model === '') {
-    //             alert('Введите модель');
-    //             continue;
-    //         }
-    //         catalogHynday = addElement(catalogHynday, model);
-    //         console.log(catalogHynday);
-    //     }
-    //
-    //     let error = confirm('Если вы где-то ошиблись, выберите ок для правки. Потом введите модель которую хотите заменить, а потом НА КОТОРУЮ хотите заменить')
-    //     if (error) {
-    //         while (true) {
-    //             let model1 = prompt('Название модели которую меняем');
-    //             if (!model1) break;
-    //             let model2 = prompt('Название модели НА которую меняем');
-    //             if (!model2) break;
-    //
-    //             catalogHynday = replace(catalogHynday, model1, model2);
-    //             console.log(catalogHynday);
-    //             console.log('Замена проведена - новый каталог');
-    //             showElement(catalogHynday);
-    //             let escape = confirm('Выйти из программы?');
-    //             if (escape) {
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //
-    //     return catalogHynday;
-    // }
-    //
-    // function runCatalog() {
-    //     let newArr = fillHyanday();
-    //     showElement(newArr);
-    // }
-    //
-    // runCatalog();
-    //
-    //
-    // // let arr = [1, 3];
-    // // function unshift1 (param){
-    // let newArr = [];
+    function showArray(arr) {
+        var value = confirm(arr);
+        value ? getValue() : end();
+    }
 
-    // for (i = 0; i < arr.length; i++){
-    // 	newArr[i + 1] = arr[i];
+    function addArray(arr) {
+        var value = prompt('enter значение');
+        value = parseInt(value);
+        var getConfirm = confirm('Добавить: ' + (value));
+        if (arr.indexOf(value) !== -1) {
+            alert('есть такой');
+            addArray(arr);
+        } else {
+            arr.push(value);
+            alert('Успешно');
+            showArray(arr);
+        }
 
-    // }
-    //     arr = newArr;
+    }
 
-    // }
-    // unshift1(4);
-    // console.log(arr);
-    //     let arr = [1,2,3,4,5,6];
-    // function f2(start, end, replace){
-    // 	let arrNew = [];
-    // 	var deleted = start + end;
-    // 	//let replace = start;
-    // 	for (i = 0; i < arr.length; i++){
-    // 	   if(i <= start){
-    // 	   arrNew[i] = arr[i];
-    // 		}
-    // 		if(i > deleted){
-    // 			arrNew[i - end ] = arr[i];
-    // 		}
-    // 		if(i >= start && i < deleted ){
-    // 		    arrNew[i ] = replace;
-    // 		}
-    // 	}
-    // 	 arr = arrNew;
-    // }
-
-
-    //  f2(2, 2, 45);
-
-    // console.log(arr);
-
+    getValue();
+    console.log(array);
 </script>
 </body>
 </html>
