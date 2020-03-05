@@ -7,23 +7,38 @@
 <body>
 <script>
     var array = [1, 2, 3, 7, 1, 9, 4, 10, 15, 16, 25, 2];
+    var arr3 = ['sdsd', 'sd', 'fgsg', 'sd', 23];
     console.log(array);
 
-    function getValue() {
-        var value = prompt('ENTER VALUE "1"-DELETED,"2"-VIEW-ARRAY,"3"-Finish,"4"-ADD-ARRAY');
+    function getValue(arr) {
+        var description = 'ENTER VALUE "1"-DELETED,"2"-VIEW-ARRAY,"3"-Finish,"4"-ADD-ARRAY,"5"-SHOW STRING IN ARRAY,' +
+            '7-SearchArrayByLength,8-filterItemsInArray';
+        var value = prompt(description);
         value = parseInt(value);
         switch (value) {
             case 1:
-                deleteValueArray(array);
+                deleteValueArray(arr);
                 break;
             case 2:
-                showArray(array);
+                showArray(arr);
                 break;
             case 3:
                 end();
                 break;
             case 4:
-                addArray(array);
+                addArray(arr);
+                break;
+            case 5:
+                searchAllStringInArray(arr);
+                break;
+            case 6:
+                searchStringByValue(arr);
+                break;
+            case 7:
+                searchArrayByLength(arr);
+                break;
+            case 8:
+                filterItemsInArray(arr);
                 break;
             default:
                 alert('error');
@@ -76,8 +91,83 @@
 
     }
 
-    getValue();
-    console.log(array);
+    function searchAllStringInArray(arr) {
+        var newArr = [];
+        var search = arr.find(function (value) {
+            if (typeof value === 'string') {
+                newArr.push(value)
+            }
+        });
+        if (newArr.length === 0) {
+            alert('no string in array');
+        } else {
+            // console.log(newArr);
+            return newArr; //TODO add ternary expression
+        }
+        // else if (confirm(newArr)) {
+        //     return newArr;
+        // }
+    }
+
+    function searchStringByValue(arr) {
+        var valueUser = prompt('ENTER VALUE(STRING)');
+        var newArr = [];
+        var search = arr.find(function (value) {
+            if (valueUser === value) {
+                newArr.push(value)
+            }
+        });
+        if (newArr.length === 0) {
+            alert('no string in array');
+        } else if (confirm(newArr)) {
+            getValue();
+        }
+
+    }
+
+    function searchArrayByLength(arr) {
+        var valueUser = prompt('enter length string');
+        valueUser = parseInt(valueUser);
+        const result = arr.filter(word => word.length === valueUser);
+        if (confirm(result)) {
+            getValue();
+        }
+    }
+
+    function filterItemsInArray(arr) {
+        // V-1
+
+        var valueUser = prompt('enter value');
+        arr = searchAllStringInArray(arr);
+        var result = arr.filter(el => el.indexOf(valueUser) !== -1);
+        if (confirm(result)){
+            getValue(arr);
+        }else{
+            alert('end')
+            //TODO add ternary expression
+        }
+        // V-2
+
+        // var valueUser = prompt('enter value');
+        // valueUser = valueUser.split('');
+        // // console.log(valueUser);
+        // arr = searchAllStringInArray(arr);
+        // // console.log(arr);
+        // var count = [];
+        // var str;
+        // for (var i = 0; i < arr.length; i++) {
+        //     for (var j = 0; j < arr.length; j++) {
+        //         // console.log( valueUser[0], valueUser[1])
+        //         if (arr[i][j] === valueUser[0] && valueUser[0]) {
+        //            count.push(arr[i])
+        //         }
+        //     }
+        // }
+        // console.log(count)
+    }
+
+    console.log(arr3)
+    getValue(arr3)
 </script>
 </body>
 </html>

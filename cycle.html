@@ -90,6 +90,32 @@
 
     //((10+26)*(30-3))/10
     console.log(division(muitiply(sum(10, 26),subtr(30, 3)),10));
+
+
+    // Строгий поиск
+
+    function searchFilerStrong(arr) {
+        let name = prompt('Enter name');
+        let filterName = arr.filter(item => item === name);
+        alert(filterName);
+    }
+
+    // Поиск по длине элемента
+
+    function lengthSearch(arr) {
+        let lengthName = prompt('Enter name');
+        lengthName = parseInt(lengthName);
+        let lengthFilter = arr.filter(item => item.length === lengthName);
+        alert(lengthFilter);
+    }
+
+    // Поиск по имеющимся в элементе буквам
+
+    function spellSearch(arr) {
+        let words = prompt('Enter name');
+        let spellFilter = arr.filter()
+
+    }
 </script>
 </body>
 </html>

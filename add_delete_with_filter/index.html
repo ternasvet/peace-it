@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>List</title>
+    <title>Filter</title>
 </head>
 <body>
 <script>
@@ -10,29 +10,40 @@
      * Данная функция является основной точкой входа в приложение.
      * Вся логика реализуется в этой функции
      */
-    function main() {
-        let users = ['Петров', 'Рогов', 'Игнатов', 'Ковальов'];
+
+    let users = ['Petrov', 'Rogov', 'Johnson', 'Smith', 'Davis'];
+    let chooseAction = 'Select an action: 1 - delete; 2 - add; 3 - strong search; 4 - length search; 5 - spell search; ' +
+        '6 - show all; 7 - exit';
+    let alertAction = '1 - delete; 2 - add; 3 - strong search; 4 - length search; 5 - spell search; 6 - show all or 7 - exit';
+
+
+    function main(users) {
         alert(users);
-             while (true) {
+        console.log(users);
+        while (true) {
             let action = getAction();
             switch (action) {
                 case 1:
-                    // delete;
                     users = deleteLoop(users);
                     break;
                 case 2:
-                    // add
                     users = addNameLoop(users);
                     break;
                 case 3:
-                    // show
-                    showName(users);
+                    searchFilerStrong(users);
                     break;
                 case 4:
-                    // exit
-                    alert('end');
+                    lengthSearch(users);
+                    break;
+                case 5:
+                    spellSearch(users);
+                    break;
+                case 6:
+                    showName(users);
+                    break;
+                case 7:
+                    //alert('end');
                     return;
-                // как корректнее return или break?;
             }
         }
     }
@@ -43,13 +54,13 @@
     function getAction() {
         let choose = 0;
         while (true) {
-            choose = prompt('Выберите действие: 1 - удалить; 2 - добавить; 3 - показать все; 4 - выйти');
+            choose = prompt(chooseAction);
             choose = parseInt(choose);
             // тут проверка, если введеное число отличается от возможных вариантов ввода
-            if (choose === 1 || choose === 2 || choose === 3 || choose === 4) {
+            if (choose > 0 && choose <= 7) {
                 break;
             }
-            alert('Введите 1 - удалить, 2 - добавить, 3 - показать все или 4 - для выхода');
+            alert(alertAction);
         }
         return choose;
     }
@@ -72,9 +83,9 @@
         let index = find(arr, name);
         if (index !== -1) {
             arr.splice(index, 1);
-            alert(name + ' успешно удален');
+            alert(name + 'successfully removed');
         } else {
-            alert('Такого имени нет');
+            alert('There is no such name');
         }
         return arr;
     }
@@ -83,13 +94,13 @@
 
     function deleteLoop(arr) {
         while (true) {
-            let question = prompt('Введите имя для удаления или отмена для выхода');
+            let question = prompt('Enter a name to delete or cancel to exit');
             //если !question - не работает выход из цикла
             if (typeof question === 'object') {
                 break;
             }
             if (!question) {
-                alert('Введите имя');
+                alert('Enter name');
                 continue;
             }
 
@@ -105,9 +116,9 @@
         let index = find(arr, value);
         if (index === -1) {
             arr.push(value);
-            alert(value + ' успешно добавлен');
+            alert(value + 'Successfully added');
         } else {
-            alert('Такое имя уже существует');
+            alert('This name already exists');
         }
         return arr;
     }
@@ -116,14 +127,14 @@
 
     function addNameLoop(arr) {
         while (true) {
-            let name = prompt('Введите имя для добавления или отмена для выхода');
+            let name = prompt('Enter a name to add or cancel to exit');
             //если вместо name === null  - !name  не работает выход из цикла.
             //работает, если name = parseInt(name);
             if (typeof name === 'object') {
                 break;
             }
             if (!name) {
-                alert('Ошибка: Пустое имя нельзя добавить');
+                alert('Error: Empty name cannot be added');
                 continue;
             }
 
@@ -136,10 +147,65 @@
     // Обновляемый список удаленных и добавленных имен
 
     function showName(arr) {
-        alert('Список всех имен: ' + arr);
+        alert('List of all names: ' + arr);
     }
 
-    main();
+    // Строгий поиск
+    function searchFilerStrong(arr) {
+        let name = prompt('Enter name');
+        let result = arr.filter(item => name === item);
+        output(result, name);
+    }
+
+    // function searchFilerStrong(arr) {
+    //     let name = prompt('Enter name');
+    //     if (arr.indexOf(name) !== -1) {
+    //         alert(name);
+    //     } else {
+    //         alert('not found');
+    //     }
+    // }
+
+    // Поиск по длине элемента
+
+    function lengthSearch(arr) {
+        let lengthName = prompt('Enter length');
+        lengthName = parseInt(lengthName);
+        let lengthFilter = arr.filter(item => item.length === lengthName);
+        output(lengthFilter, lengthName);
+
+    }
+
+    // Поиск по имеющимся в элементе буквам
+
+    function spellSearch(arr) {
+        let letters = prompt('Enter letters');
+        let spellFilter = arr.filter((name) => {
+            let inStr = true;
+            letters.split('').forEach((arr) => {
+                if (name.toLowerCase().indexOf(arr.toLowerCase()) === -1) {
+                    inStr = false;
+                }
+            });
+
+            return inStr;
+        });
+
+        output(spellFilter, letters);
+    }
+
+    function output(arr, value) {
+        if (!value) {
+            alert('nothing entered');
+            return;
+        }
+        if (arr.length) {
+            alert(arr);
+        }
+    }
+
+
+    main(users);
 </script>
 </body>
 </html>
