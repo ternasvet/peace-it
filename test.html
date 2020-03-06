@@ -2,248 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
 <script>
-    var array = [1, 2, 3, 7, 1, 9, 4, 10, 15, 16, 25, 2];
-    var arr3 = ['sdsd', 'sd', 'fgsg', 'sd', 23];
-    console.log(array);
+    var arr=[];
 
-    function getValue(arr) {
-        var description = 'ENTER VALUE "1"-DELETED,"2"-VIEW-ARRAY,"3"-Finish,"4"-ADD-ARRAY,"5"-SHOW STRING IN ARRAY,' +
-            '7-SearchArrayByLength,8-filterItemsInArray';
-        var value = prompt(description);
-        value = parseInt(value);
-        switch (value) {
-            case 1:
-                deleteValueArray(arr);
-                break;
-            case 2:
-                showArray(arr);
-                break;
-            case 3:
-                end();
-                break;
-            case 4:
-                addArray(arr);
-                break;
-            case 5:
-                searchAllStringInArray(arr);
-                break;
-            case 6:
-                searchStringByValue(arr);
-                break;
-            case 7:
-                searchArrayByLength(arr);
-                break;
-            case 8:
-                filterItemsInArray(arr);
-                break;
-            default:
-                alert('error');
-                break;
+    (function fillRandom(array,number,maxValue){
+        for(var i=0;i<number;i++){
+            array.push(Math.floor(Math.random()*maxValue));
         }
+        return array;
+    })(arr,20,100);
+
+    function swap(array,a=1,b=0){
+        var temp=array[a];
+        array[a]=array[b];
+        array[b]=temp;
+        return array;
     }
 
-    function deleteValueArray(arr) {
-        var value = prompt('value');
-        value = parseInt(value);
-        if (arr.indexOf(value) !== -1) {
-            arr.splice(arr.indexOf(value), 1);
-            console.log(arr)
-        }
-        var result = confirm('Еще кого-то?');
-        if (result) {
-            deleteValueArray(arr);
-            console.log(arr)
-        } else {
-            var confirmEnd = confirm('Точно?');
-            if (confirmEnd) {
-                getValue()
-            } else {
-                deleteValueArray(arr)
-            }
-        }
-    }
-
-    function end() {
-        alert('end')
-    }
-
-    function showArray(arr) {
-        var value = confirm(arr);
-        value ? getValue() : end();
-    }
-
-    function addArray(arr) {
-        var value = prompt('enter значение');
-        value = parseInt(value);
-        var getConfirm = confirm('Добавить: ' + (value));
-        if (arr.indexOf(value) !== -1) {
-            alert('есть такой');
-            addArray(arr);
-        } else {
-            arr.push(value);
-            alert('Успешно');
-            showArray(arr);
-        }
-
-    }
-
-    function searchAllStringInArray(arr) {
-        var newArr = [];
-        var search = arr.find(function (value) {
-            if (typeof value === 'string') {
-                newArr.push(value)
-            }
-        });
-        if (newArr.length === 0) {
-            alert('no string in array');
-        } else {
-            // console.log(newArr);
-            return newArr; //TODO add ternary expression
-        }
-        // else if (confirm(newArr)) {
-        //     return newArr;
-        // }
-    }
-
-    function searchStringByValue(arr) {
-        var valueUser = prompt('ENTER VALUE(STRING)');
-        var newArr = [];
-        var search = arr.find(function (value) {
-            if (valueUser === value) {
-                newArr.push(value)
-            }
-        });
-        if (newArr.length === 0) {
-            alert('no string in array');
-        } else if (confirm(newArr)) {
-            getValue();
-        }
-
-    }
-
-    function searchArrayByLength(arr) {
-        var valueUser = prompt('enter length string');
-        valueUser = parseInt(valueUser);
-        const result = arr.filter(word => word.length === valueUser);
-        if (confirm(result)) {
-            getValue();
-        }
-    }
-
-    function filterItemsInArray(arr) {
-        // V-1
-
-        var valueUser = prompt('enter value');
-        arr = searchAllStringInArray(arr);
-        var result = arr.filter(el => el.indexOf(valueUser) !== -1);
-        if (confirm(result)){
-            getValue(arr);
-        }else{
-            alert('end')
-            //TODO add ternary expression
-        }
-        // V-2
-
-        // var valueUser = prompt('enter value');
-        // valueUser = valueUser.split('');
-        // // console.log(valueUser);
-        // arr = searchAllStringInArray(arr);
-        // // console.log(arr);
-        // var count = [];
-        // var str;
-        // for (var i = 0; i < arr.length; i++) {
-        //     for (var j = 0; j < arr.length; j++) {
-        //         // console.log( valueUser[0], valueUser[1])
-        //         if (arr[i][j] === valueUser[0] && valueUser[0]) {
-        //            count.push(arr[i])
-        //         }
-        //     }
-        // }
-        // console.log(count)
-    }
-
-    console.log(arr3)
-    getValue(arr3)
-
-    //let arr = [2, 4, 5, 26, 6, 6, 45];
-    //
-    // function sortArray(arr) {
-    //
-    //     console.log('input: ' + arr);
-    //     let arrCopy = arr.slice(0, arr.length);
-    //     let result = [];
-    //
-    //     arrCopy.forEach((el, i) => {
-    //         let index = min = 0;
-    //
-    //         arr.reduce((a, b) => {
-    //             min = (a <= b) ? a : b;
-    //
-    //             return min;
-    //         })
-    //         console.log(min);
-    //         index = arr.indexOf(min);
-    //
-    //         result.push(i === arrCopy.length - 1 ? arr[0] : arr[index]);
-    //
-    //         arr.splice(index, 1);
-    //     });
-    //
-    //     console.log('output: ' + result);
-    //
-    //
-    // }
-    // sortArray(arr)
-    //
-
-    let arr = [2, 4, 5, 26, 6, 6, 45];
-
-    function sortArray(arr) {
-        console.log('arr: ' + arr);
-        let result = [];
-        for (i = 0; i < arr.length; i++) {
-            result.push(arr[i]);
-            console.log(result);
-        }
-        arr.reduce((a, b) => {
-            min = (a <= b) ? a : b;
-            arr.forEach((item) => {
-                //console.log(item);
-                if (item > min) {
-                    item = min;
-                    console.log(item);
-                    return item;
-                } else {
-                    min = item
-                    console.log(min);
-                    return min;
+    console.log(arr);
+    function qSort(array,a=0,b=array.length-1){
+        if (array.length>1){
+            var mid=array[Math.floor((a+b)/2)],i=a,j=b;
+            while (i<=j) {
+                while (array[i]<mid) i++;
+                while (array[j]>mid) j--
+                if (i<=j) {
+                    array=swap(array, i, j);
+                    i++;
+                    j--;
                 }
+            }
+            if (a < i-1) qSort(array, a, i-1);
+            if (i < b) qSort(array, i, b);
+        }
+        return array;
+    };
 
-            });
-            console.log(min);
+    arr=qSort(arr);
+    console.log(arr);
 
-        });
-        //index = arr.indexOf(min);
-        // let min2 = min;
-
-        // index = arr.indexOf(min);
-        //
-        // result.push(arr.length - 1 ? arr[0] : arr[index]);
-        //
-        // arr.splice(index, 1);
-
-
-        //;
-
-        //console.log('output: ' + result);
-
-    }
-
-    sortArray(arr);
 </script>
 </body>
 </html>
