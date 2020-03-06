@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sort</title>
+</head>
+<body>
+<script>
+    let arr = [2, 4, 5, 26, 6, 8, 45, 1];
+
+    function sortArray(arr) {
+
+        console.log('array: ' + arr);
+        let arrCopy = arr.slice(0, arr.length);
+        let result = [];
+
+        arrCopy.forEach((el, i) => {
+            let index = min = 0;
+
+            arr.reduce((a, b) => {
+                min = (a <= b) ? a : b;
+
+                return min;
+            });
+            index = arr.indexOf(min);
+
+            result.push(i === arrCopy.length - 1 ? arr[0] : arr[index]);
+
+            arr.splice(index, 1);
+        });
+
+        console.log('output array: ' + result);
+    }
+
+    sortArray(arr)
+
+</script>
+</body>
+</html>
