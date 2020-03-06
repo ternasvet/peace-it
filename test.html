@@ -168,6 +168,82 @@
 
     console.log(arr3)
     getValue(arr3)
+
+    //let arr = [2, 4, 5, 26, 6, 6, 45];
+    //
+    // function sortArray(arr) {
+    //
+    //     console.log('input: ' + arr);
+    //     let arrCopy = arr.slice(0, arr.length);
+    //     let result = [];
+    //
+    //     arrCopy.forEach((el, i) => {
+    //         let index = min = 0;
+    //
+    //         arr.reduce((a, b) => {
+    //             min = (a <= b) ? a : b;
+    //
+    //             return min;
+    //         })
+    //         console.log(min);
+    //         index = arr.indexOf(min);
+    //
+    //         result.push(i === arrCopy.length - 1 ? arr[0] : arr[index]);
+    //
+    //         arr.splice(index, 1);
+    //     });
+    //
+    //     console.log('output: ' + result);
+    //
+    //
+    // }
+    // sortArray(arr)
+    //
+
+    let arr = [2, 4, 5, 26, 6, 6, 45];
+
+    function sortArray(arr) {
+        console.log('arr: ' + arr);
+        let result = [];
+        for (i = 0; i < arr.length; i++) {
+            result.push(arr[i]);
+            console.log(result);
+        }
+        arr.reduce((a, b) => {
+            min = (a <= b) ? a : b;
+            arr.forEach((item) => {
+                //console.log(item);
+                if (item > min) {
+                    item = min;
+                    console.log(item);
+                    return item;
+                } else {
+                    min = item
+                    console.log(min);
+                    return min;
+                }
+
+            });
+            console.log(min);
+
+        });
+        //index = arr.indexOf(min);
+        // let min2 = min;
+
+        // index = arr.indexOf(min);
+        //
+        // result.push(arr.length - 1 ? arr[0] : arr[index]);
+        //
+        // arr.splice(index, 1);
+
+
+        //;
+
+        //console.log('output: ' + result);
+
+    }
+
+    sortArray(arr);
 </script>
 </body>
 </html>

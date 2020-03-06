@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object</title>
+</head>
+<body>
+<script>
+    let familyPerson = {
+        type: 'me',
+        name: 'Sasha',
+        age: 23,
+        family: [
+            {
+                type: 'father',
+                name: 'Denis',
+                age: 49
+            },
+            {
+                type: 'mather',
+                name: 'Anna',
+                age: 48
+            },
+            {
+                type: 'brother',
+                name: 'Miha',
+                age: 9
+            },
+            {
+                type: 'sister',
+                name: 'Olga',
+                age: 25,
+                family: [
+                    {
+                        type: 'husband',
+                        name: 'Serg',
+                        age: 27
+                    },
+                    {
+                        type: 'sun',
+                        name: 'Den',
+                        age: 2
+                    }
+
+                ]
+            }
+        ]
+    };
+
+    function foreachPerson(obj) {
+        let sum = 0;
+        for (let key in obj) {
+            let value = obj[key];
+            if (key === 'age') {
+                let num = parseInt(value);
+                if (!Number.isNaN(num)) {  //if (typeof num === 'number') {
+                    sum += num;
+                }
+                console.log('All num: ' + num);
+                continue;
+            }
+            if (typeof value === 'object') {
+                if (Array.isArray(value)) {
+                    value.forEach((item) => {
+                        sum += foreachPerson(item);
+                    });
+                } else {
+                    foreachPerson(obj[key]);
+                }
+            }
+        }
+        return sum;
+    }
+
+    console.log('Sum: ' + foreachPerson(familyPerson));
+
+</script>
+
+</body>
+</html>
