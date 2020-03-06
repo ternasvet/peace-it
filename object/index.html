@@ -47,7 +47,7 @@
         ]
     };
 
-    function foreachPerson(obj) {
+    function getSumAge(obj) {
         let sum = 0;
         for (let key in obj) {
             let value = obj[key];
@@ -62,17 +62,17 @@
             if (typeof value === 'object') {
                 if (Array.isArray(value)) {
                     value.forEach((item) => {
-                        sum += foreachPerson(item);
+                        sum += getSumAge(item);
                     });
                 } else {
-                    foreachPerson(obj[key]);
+                    getSumAge(obj[key]);
                 }
             }
         }
         return sum;
     }
 
-    console.log('Sum: ' + foreachPerson(familyPerson));
+    console.log('Sum: ' + getSumAge(familyPerson));
 
 </script>
 
