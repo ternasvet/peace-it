@@ -15,8 +15,10 @@
         console.log(str);
         //let num = 0;
         for (i = 0; i < str.length; i++) {
-            hash += addSault(str.charCodeAt(i), 5);
+            hash += str.charCodeAt(i);
         }
+
+        hash = ((hash << 5) + hash) + addSault(hash, 5);
         console.log('мой хэш:  ' + hash);
 
         return hash;
@@ -27,7 +29,7 @@
     function addSault(num, size) {
         let s = num + '';
         while (s.length < size) {
-            s = '0' + s;
+            s = '0w' + s;
         }
         return s;
     }
@@ -41,7 +43,7 @@
 
     console.log('we are living in yellow submarine'.slice(5, 10)); //e liv
 
-    console.log('10:45 pm'.slice(0,-3)); //
+    console.log('10:45 pm'.slice(0, -3)); //
 
     //split() Разделить по пробелу, взять первую часть
 
