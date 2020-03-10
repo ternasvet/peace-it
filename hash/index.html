@@ -7,26 +7,70 @@
 <body>
 <script>
 
+    let authorization = {};
+
+    let userPassword = prompt('Password');
+
+    function Obj(authorization, password) {
+        authorization.password = password;
+        authorization.sault = getRandomSymbol();
+        console.log(authorization);
+    }
+
+    Obj(authorization, userPassword);
+
+    function hash(obj) {
+        let hash = '';
+        let result = Object.values(obj).map(v => v);
+        let arrRes = result.join('').split('');
+        arrRes.forEach((item, index) => {
+            item.charAt(index);
+            hash += addSault(item.charCodeAt(), 5);
+        });
+        return hash;
+    }
+
+    console.log(hash(authorization, getRandomSymbol()));
+
+    function addSault(num, size) {
+        var s = num + '';
+        while (s.length < size) {
+            s = '0' + s;
+        }
+        return s;
+    }
+
+
+    function getRandomSymbol() {
+        var result = '';
+        var words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+        var max_position = words.length - 1;
+        for (i = 0; i < 2; ++i) {
+            position = Math.floor(Math.random() * max_position);
+            result = result + words.substring(position, position + 1);
+        }
+        return result;
+    }
+
+    // light version
+
     let hashParol = '4578Polly';
 
-
-    function hash(str) {
+    function hash2(str) {
         let hash = 0;
         console.log(str);
         //let num = 0;
         for (i = 0; i < str.length; i++) {
             hash += str.charCodeAt(i);
         }
-
-        hash = ((hash << 5) + hash) + addSault(hash, 5);
-        console.log('мой хэш:  ' + hash);
+        hash = ((hash << 5) + hash) + addSaultTwo(hash, 5);
 
         return hash;
     }
 
-    console.log(hash(hashParol));
+    console.log(hash2(hashParol));
 
-    function addSault(num, size) {
+    function addSaultTwo(num, size) {
         let s = num + '';
         while (s.length < size) {
             s = '0w' + s;
@@ -48,6 +92,8 @@
     //split() Разделить по пробелу, взять первую часть
 
     console.log('10:45 pm'.split(' ')[0]);//10:45
+
+    console.log('My adress : street Green'.split(' ')[2]);//  :
 
     console.log('10:45 pm'.split(' ', 1).join(' '));//10:45
 
@@ -75,9 +121,9 @@
     //replace()
     //Замена : на -
 
-    console.log('10:45 pm'.replace(":", "-"));//10-45 pm
+    console.log('10 45 34'.replace(' ', '-'));//10-45
 
-    console.log('10:45 pm'.replace(' pm', '')); //10-45
+    console.log('10:45 pm'.replace(' pm', '')); //10:45
 
     console.log('10:45 pm'.replace(' pm', ' am')); //10:45 am
 

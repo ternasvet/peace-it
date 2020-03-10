@@ -7,7 +7,59 @@
 <body>
 
 <script>
-    let user = prompt
+    let authorization = {};
+
+    let userLogin = prompt('Login');
+    let userPassword = prompt('Password');
+
+        function Obj(authorization, login, password) {
+
+        authorization.login = password;
+        authorization.sault = getRandomSymbol();
+        console.log(authorization);
+    }
+
+    Obj(authorization, userLogin, userPassword);
+
+    function hash(obj) {
+        let hash = '';
+        let num = 0;
+        let result = Object.values(obj).map(v => v);
+        let arrRes = result.join('').split('');
+        console.log(arrRes);
+        arrRes.forEach((item, index) => {
+            item.charAt(index);
+            hash += addSault(item.charCodeAt(), 5);
+        });
+
+        console.log(hash);
+        return hash;
+    }
+
+    hash(authorization, getRandomSymbol());
+
+    function addSault(num, size) {
+        var s = num + '';
+        while (s.length < size) {
+            s = '0' + s;
+        }
+        console.log(s);
+        return s;
+    }
+
+
+    function getRandomSymbol() {
+        var result = '';
+        var words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+        var max_position = words.length - 1;
+        for (i = 0; i < 2; ++i) {
+            position = Math.floor(Math.random() * max_position);
+            result = result + words.substring(position, position + 1);
+        }
+        return result;
+    }
+
+
 
 </script>
 
