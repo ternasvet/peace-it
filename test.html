@@ -2,50 +2,216 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Hash</title>
 </head>
 <body>
 <script>
-    var arr=[];
-
-    (function fillRandom(array,number,maxValue){
-        for(var i=0;i<number;i++){
-            array.push(Math.floor(Math.random()*maxValue));
-        }
-        return array;
-    })(arr,20,100);
-
-    function swap(array,a=1,b=0){
-        var temp=array[a];
-        array[a]=array[b];
-        array[b]=temp;
-        return array;
-    }
-
-    console.log(arr);
-    function qSort(array,a=0,b=array.length-1){
-        if (array.length>1){
-            var mid=array[Math.floor((a+b)/2)],i=a,j=b;
-            while (i<=j) {
-                while (array[i]<mid) i++;
-                while (array[j]>mid) j--
-                if (i<=j) {
-                    array=swap(array, i, j);
-                    i++;
-                    j--;
-                }
-            }
-            if (a < i-1) qSort(array, a, i-1);
-            if (i < b) qSort(array, i, b);
-        }
-        return array;
+    let hashParol2 = {
+        password: 'toUpperMyPower'
     };
 
-    arr=qSort(arr);
-    console.log(arr);
+    // let hashObject =
+    function hash2(obj) {
+        //минимальная строка хэша, кратная двум
+        //let minLength = 2;
 
+
+        let result = Object.values(obj).map(v => v);
+        var arrRes = result.join('').split('');
+        console.log(arrRes);
+        arrRes.forEach((item, index) => {
+            item.charAt(index);
+            for (let i = 0; i< item.length; i++){
+                console.log(item.charCodeAt(i));
+            }
+
+            // console.log(a);
+            // var ints = item.map(ascii);
+            // console.log(ints);
+            // return ints;
+
+        });
+        // let originalSault = getSault(item);
+        // let originalLengthStr = item.length;
+        // if ((minLength - originalLengthStr) < minLength) {
+        //     minLength *= 2;
+        // }
+        //console.log(eval(item.valueOf()));
+    }
+
+    // Метод принятия контрольной суммы
+    // Функция принимает определенную строку,
+    // прибавляем в переменную sault  код каждого символа, который есть в этой строке
+    //получаем сумму всех символов
+    // function getSault(str) {
+    //     let sault = 0;
+    //     for (i = 0; i < str.length; i++) {
+    //         sault += str[i];
+    //     }
+    //     return sault;
+    // }
+
+    // getSault()
+
+
+    let hashParol = {
+        password: 'toUpperMyPower'
+    };
+
+    // let hashObject =
+    function hash(obj, size = 7) {
+        //минимальная строка хэша, кратная двум
+        //let minLength = 2;
+        // let sizeLen = size;
+        //let string =
+        // let input = 'Tim'
+        // let inputLower = input.toLowerCase();
+        let output = '';
+        let result = Object.values(obj).map(v => v);
+        let arrRes = result.join('').split('');
+        console.log(arrRes);
+        arrRes.forEach((item, index) => {
+            let originalSault = item.length;
+            item.charAt(index);
+            //let numcharAt = item.charCodeAt();
+            output += pad(item.charCodeAt() - 97, originalSault, 7);
+            //stringHash(output);
+            //console.log(output);
+            // var ints = item.map(ascii);
+            // console.log(ints);
+            // return ints;
+        });
+        console.log(output);
+        // let originalSault = getSault(item);
+        // let originalLengthStr = item.length;
+        // if ((minLength - originalLengthStr) < minLength) {
+        //     minLength *= 2;
+        // }
+        //console.log(eval(item.valueOf()));
+    }
+
+    function stringHash(string) {
+        return string.length % 7;
+    }
+
+    function pad(num, str, size) {
+        var s = num + str;
+        while (s.length < size) {
+            s = "0" + s;
+        }
+        return s;
+    }
+
+    // Метод принятия контрольной суммы
+    // Функция принимает определенную строку,
+    // прибавляем в переменную sault  код каждого символа, который есть в этой строке
+    //получаем сумму всех символов
+    // function getSault(str) {
+    //     let sault = 0;
+    //     for (i = 0; i < str.length; i++) {
+    //         sault += str[i];
+    //     }
+    //     return sault;
+    // }
+
+    // getSault()
+
+
+    hash(hashParol);
+
+    hash(hashParol);
+
+    // let hashParol = {
+    //     password: '4578'
+    // };
+
+    let hashParol = '45iop79';
+    let sault = getSault();
+    // function strObj(obj) {
+    //     let arrFromObj = Object.values(obj).map(v => v);
+    //     let str = arrFromObj.join('');
+    //     return str;
+    // }
+    // console.log(strObj(hashParol));
+    function hash(str) {
+        let hash = 0;
+        console.log(str);
+        //let num = 0;
+        for (i = 0; i < str.length; i++) {
+            hash += str.charCodeAt(i);
+        }
+        hash = ((hash << 5) + hash) + addSault(hash, 5);
+        console.log('мой хэш:  ' + hash);
+
+        return hash;
+    }
+
+    console.log(hash(hashParol));
+
+    function addSault(num, size) {
+
+        let s = num / 2 + '';
+        while (s.length < size) {
+            s = getSault() + s;
+        }
+        return s;
+    }
+
+
+    // Функция для получения рандомных букв из строки для соли
+    function getSault() {
+        var result = '';
+        var words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+        var max_position = words.length - 1;
+        for (i = 0; i < 2; ++i) {
+            position = Math.floor(Math.random() * max_position);
+            result = result + words.substring(position, position + 1);
+            console.log(result);
+        }
+        return result;
+    }
+
+
+    // function hash(obj) {
+    //     let hash = '';
+    //     let result = Object.values(obj).map(v => v);
+    //     let arrRes = result.join('').split('');
+    //     console.log(arrRes);
+    //     arrRes.forEach((item, index) => {
+    //         item.charAt(index);
+    //         let num = item.charCodeAt();
+    //         let originalSault = getSault();
+    //         console.log(num);
+    //         hash += addSault(num, originalSault, 5);
+    //         //hash = ((hash<<5)+ hash);
+    //     });
+    //     console.log(hash);
+    //
+    // }
+    //
+    // //Функция для преобразования соли для подмешивания в хэш-функцию
+    // function addSault(num, sault, size) {
+    //     var s = num + '';
+    //     while (s.length < size) {
+    //         s = sault + s;
+    //     }
+    //     console.log(s)
+    //     return s;
+    // }
+    //
+    // // Функция для получения рандомных букв из строки для соли
+    // function getSault() {
+    //     var result = '';
+    //     var words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    //     var max_position = words.length - 1;
+    //     for (i = 0; i < 2; ++i) {
+    //         position = Math.floor(Math.random() * max_position);
+    //         result = result + words.substring(position, position + 1);
+    //     }
+    //     return result;
+    // }
+    //
+    // hash(hashParol);
 </script>
 </body>
 </html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hash</title>
+</head>
+<body>
+<script>
+
+    let hashParol = '4578Polly';
+
+
+    function hash(str) {
+        let hash = 0;
+        console.log(str);
+        //let num = 0;
+        for (i = 0; i < str.length; i++) {
+            hash += addSault(str.charCodeAt(i), 5);
+        }
+        console.log('мой хэш:  ' + hash);
+
+        return hash;
+    }
+
+    console.log(hash(hashParol));
+
+    function addSault(num, size) {
+        let s = num + '';
+        while (s.length < size) {
+            s = '0' + s;
+        }
+        return s;
+    }
+
+
+    //string trimming methods
+
+    //slice()
+
+    console.log('we are living in yellow submarine'.slice(5)); //e living in yellow submarine
+
+    console.log('we are living in yellow submarine'.slice(5, 10)); //e liv
+
+    console.log('10:45 pm'.slice(0,-3)); //
+
+    //split() Разделить по пробелу, взять первую часть
+
+    console.log('10:45 pm'.split(' ')[0]);//10:45
+
+    console.log('10:45 pm'.split(' ', 1).join(' '));//10:45
+
+    //Замена : на -
+
+    let oldS = ':';
+    let newS = '-';
+    console.log('10:45 pm'.split(oldS).join(newS));//10-45 pm
+
+
+    //substr()
+    //Метод substr() возвращает указанное количество символов из строки, начиная с указанной позиции.
+
+    console.log('10:45 pm'.substr(0, 5));//10:45
+
+
+    //substring()
+    // Метод substring() возвращает подстроку строки между двумя индексами, или от одного индекса и до конца строки.
+    //метод копирует строку между указанными индексами
+    console.log('10:45 pm'.substring(0, 5));//10:45
+
+    console.log('10:45 pm'.slice(0, -3)); //10:45
+
+
+    //replace()
+    //Замена : на -
+
+    console.log('10:45 pm'.replace(":", "-"));//10-45 pm
+
+    console.log('10:45 pm'.replace(' pm', '')); //10-45
+
+    console.log('10:45 pm'.replace(' pm', ' am')); //10:45 am
+
+    //trim();
+    console.log(' we are living in yellow submarine  '.trim());  //we are living in yellow submarine
+
+
+    //regExp
+    let regex = /\:/;
+    console.log('10:45 pm'.replace(regex, "-"));
+
+</script>
+</body>
+</html>
