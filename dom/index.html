@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+</head>
+<body>
+<div class="single">
+    <h1 class="h1-single">I am a Blog Post with an Awesome Image</h1>
+    <ul class="single-ul">
+        <li class="single-li">by Jenn Pereira</li>
+        <li class="single-li">February 28, 2015</li>
+        <li class="single-li"><i class="far fa-heart"></i>324 likes</li>
+    </ul>
+    <div class="single-img">
+        <!--<img src="img/tumblr_nkdh2aUv2E1sfyngeo2_1280-2zos2a3pujnt4w37e5oc1s.png" alt="">-->
+    </div>
+    <p class="single-p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+        tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+        tation ullamcorper suscipit. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
+    <p class="single-p">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+        illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
+        luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend
+        option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+    <blockquote class="blockquote-single">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
+        vitae dicta sunt. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.
+    </blockquote>
+    <h2 class="h2-single">This is a Heading</h2>
+    <p class="single-p">Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.
+        Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus
+        dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc
+        putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima.
+        Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+    <p class="single-p">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+        tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+        tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in
+        hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros
+        et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
+        nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue.
+    </p>
+    <h4 class="single-h4">Leave a Comment</h4>
+    <form action="" class="single-form">
+        <input type="text" placeholder="Name" class="single-input-text">
+        <input type="text" placeholder="Email" class="single-input-text">
+        <input type="text" placeholder="Website" class="single-input-text">
+        <textarea name="" id="" cols="30" rows="10" class="single-form-textarea" placeholder="Message"></textarea>
+        <button class="single-button">SEND MESSAGE</button>
+    </form>
+</div>
+
+<script>
+    var elems = document.body.getElementsByClassName('single');
+
+    function getElement(elems) {
+        if (!elems) {
+            return;
+        }
+        if (typeof elems === 'object') {
+            let result = {};
+            for (let key in elems) {
+               // if (elems.children) {
+                    //console.log(elems);
+                    let items = elems[key];
+
+                if  (result[items.tagName])  {
+                        result[items.tagName]++;
+                    } else {
+                        result[items.tagName] = 1;
+
+                    }
+                //}
+            }
+            return result;
+        }
+        if (typeof elems === 'object') {
+            if (elems.children) {
+                if (Array.isArray(elems)) {
+// тут перебор цикла
+                    elems.forEach((item) => function () {
+                        if (elems.children) {
+                            console.log(elems);
+                            getElement(elems[item]);
+                        }else{}
+                    });
+                }
+            }
+        }
+    }
+
+    console.log(getElement(elems));
+    //console.log(result);
+
+    //
+    //         var result = {};
+    //         var elems = document.body.getElementsByTagName("*");
+    //         if (typeof elems === 'object')
+    // // тут перебор объекта
+    //             for (let item in elems) {
+    //                 if (result.hasOwnProperty(item.tagName)) {
+    //                     result[item.tagName]++;
+    //                 } else {
+    //                     result[item.tagName] = 1;
+    //                 }
+    //             }
+    //         if (Array.isArray(elems))
+    // // тут перебор цикла
+    //             elemts.forEach((item)
+    //
+    //         function () {
+    //             if (result.hasOwnProperty(item.tagName)) {
+    //                 result[item.tagName]++;
+    //             } else {
+    //                 result[item.tagName] = 1;
+    //             }
+    //         }
+    //
+    //     )
+    //         ;
+    //         console.log(result);
+</script>
+</body>
+</html>
