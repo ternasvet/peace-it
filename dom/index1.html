@@ -11,6 +11,11 @@
         <li class="single-li">by Jenn Pereira</li>
         <li class="single-li">February 28, 2015</li>
         <li class="single-li"><i class="far fa-heart"></i>324 likes</li>
+        <li class="single-li"><i class="far fa-heart"></i>324 likes</li>
+        <li class="single-li"><i class="far fa-heart"></i>324 likes</li>
+        <li class="single-li"><i class="far fa-heart"></i>324 likes</li>
+        <li class="single-li"><i class="far fa-heart"></i>324 likes</li>
+
     </ul>
     <div class="single-img">
         <!--<img src="img/tumblr_nkdh2aUv2E1sfyngeo2_1280-2zos2a3pujnt4w37e5oc1s.png" alt="">-->
@@ -51,7 +56,8 @@
 
 <script>
 
-    let elems = document.getElementsByClassName('single');
+
+    let elems = document.querySelectorAll('.single');
 
     function collectTagNames(tagList, result) {
         if (typeof elems === 'object') {
@@ -63,21 +69,93 @@
                  */
                 if (!isNaN(key)) {            // (tagList[key].tagName)
                     let tag = tagList[key];
-                    if (result[tag.tagName]) {
-                        result[tag.tagName]++;
+                    let listClass = tag.classList;
+                    if (result[listClass]) {
+                        result[listClass]++;
                     } else {
-                        result[tag.tagName] = 1;
+                        result[listClass] = 1;
                     }
-                    if (tag.children.length !== 0) {
+
+                    if (Array.isArray(tag.children.length) !== 0) {
                         result = collectTagNames(tag.children, result);
                     }
                 }
             }
         }
+
         return result;
     }
 
-    console.log(collectTagNames(elems, {}));
+    function maxClass(data) {
+        let result = {};
+        for (let key in data) {
+            //метод возвращает массив значений перечисляемых свойств объекта
+            let arr = Object.values(data);
+            //переменной присваиваем наименьшее положительное числовое значение;
+            let max = Number.MIN_VALUE;
+            // нахождение максимального значения из массива через filter
+            arr.filter(function (item) {
+                if (item > max) {
+                    return max = item;
+                }
+            });
+            // сохраняем в объект ключ и значения
+            if (data[key] === max) {
+                result.key = key;
+                result.value = max;
+            }
+        }
+        return result;
+    }
+
+
+    // function maxClass(data) {
+    //     let result = {};
+    //     //переменной присваиваем наименьшее положительное числовое значение;
+    //     let max = Number.MIN_VALUE;
+    //     for (let key in data) {
+    //         if (data[key] > max) {
+    //             console.log(data[key]);
+    //             max = data[key];
+    //             result.key = key;
+    //             result.value = data[key];
+    //         }
+    //     }
+    //     return result;
+    // }
+
+    // function maxClass(data) {
+    //     let res = {};
+    //     for (let key in data) {
+    //         let arr = Object.values(data);
+    //         let max = Math.max(...arr);
+    //         if (data[key] === max) {
+    //             res.key = key;
+    //             res.value = max;
+    //         }
+    //     }
+    //     console.log(res);
+    // }
+
+    // function maxClass(data) {
+    //     let result = {};
+    //     let max = Number.MIN_VALUE;
+    //     for (let key in data) {
+    //         if (data[key] > max) {
+    //             result.key = key;
+    //             result.value = data[key];
+    //             max = data[key];
+    //         }
+    //     }
+    //     return result;
+    // }
+
+
+    let res = collectTagNames(elems, {});
+    console.log(res);
+
+    console.log(maxClass(res));
+
 </script>
 </body>
 </html>
