@@ -50,74 +50,37 @@
 </div>
 
 <script>
-    var elems = document.getElementsByClassName('single');
 
-    function getElement(elems) {
-        if (!elems) {
-            return;
-        }
-        if (typeof elems === 'object') {
-            let result = {};
-            for (let key in elems) {
-               // if (elems.children) {
-                    //console.log(elems);
-                    let items = elems[key];
+    let elems = document.getElementsByClassName('single');
 
-                if  (result[items.tagName])  {
-                        result[items.tagName]++;
+    function collectTagNames(tagList, result) {
+        if (typeof tagList === 'object') {
+            // тут перебор объекта
+            for (let key in tagList) {
+                /**
+                 * это проверка на то, что элемент является DOM элементом. Мы понимаем это исходя из
+                 * предположения что у элементов числовой ключ
+                 */
+                if (!isNaN(key)) {            // (tagList[key].tagName)
+                    let tag = tagList[key];
+                    let res = result[tag.tagName]
+                    if (result[tag.tagName]) {
+                        result[tag.tagName]++;
                     } else {
-                        result[items.tagName] = 1;
-
+                        result[tag.tagName] = 1;
                     }
-                //}
-            }
-            return result;
-        }
-        if (typeof elems === 'object') {
-            if (elems.children) {
-                if (Array.isArray(elems)) {
-// тут перебор цикла
-                    elems.forEach((item) => function () {
-                        if (elems.children) {
-                            console.log(elems);
-                            getElement(elems[item]);
-                        }else{}
-                    });
+
+                    if (Array.isArray(tag.children.length) !== 0) {
+                        result = collectTagNames(tag.children, result);
+                    }
+
                 }
             }
         }
+        return result;
     }
 
-    console.log(getElement(elems));
-    //console.log(result);
-
-    //
-    //         var result = {};
-    //         var elems = document.body.getElementsByTagName("*");
-    //         if (typeof elems === 'object')
-    // // тут перебор объекта
-    //             for (let item in elems) {
-    //                 if (result.hasOwnProperty(item.tagName)) {
-    //                     result[item.tagName]++;
-    //                 } else {
-    //                     result[item.tagName] = 1;
-    //                 }
-    //             }
-    //         if (Array.isArray(elems))
-    // // тут перебор цикла
-    //             elemts.forEach((item)
-    //
-    //         function () {
-    //             if (result.hasOwnProperty(item.tagName)) {
-    //                 result[item.tagName]++;
-    //             } else {
-    //                 result[item.tagName] = 1;
-    //             }
-    //         }
-    //
-    //     )
-    //         ;
-    //         console.log(result);
+    console.log(collectTagNames(elems, {}));
 </script>
 </body>
 </html>

@@ -60,7 +60,7 @@
     let elems = document.querySelectorAll('.single');
 
     function collectTagNames(tagList, result) {
-        if (typeof elems === 'object') {
+        if (typeof tagList === 'object') {
             // тут перебор объекта
             for (let key in tagList) {
                 /**
@@ -70,7 +70,7 @@
                 if (!isNaN(key)) {            // (tagList[key].tagName)
                     let tag = tagList[key];
                     let listClass = tag.classList;
-                    if (result[listClass]) {
+                    if (result.hasOwnProperty(listClass)) {
                         result[listClass]++;
                     } else {
                         result[listClass] = 1;
