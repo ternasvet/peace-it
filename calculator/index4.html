@@ -142,19 +142,19 @@
     let currentNum = 0;
     //булево значение, ввел ли пользователь новое число после операнда
     let newNumber = true;
+
     let flagDecimal = false;
     //для того чтобы ввелась одна операция в log
     let newOperation = true;
     //введенная пользователем операция
     let currentOperation = '';
-
+    //заводим массив для history
     let log = [];
 
     function num() {
         number.forEach((item) => {
             item.addEventListener("click", function (e) {
-                // Вот тут у нас должна находится логика
-                // которая обрабатывает нажатие на клавиши цифр
+                // логика, которая обрабатывает нажатие на клавиши цифр
                 let num = e.target.innerText;
                 //
                 newOperation = true;
@@ -184,20 +184,21 @@
                 }
                 showHistory();
             });
-
         });
     }
 
     console.log(num());
 
-    function operation() {
 
+    //функция для произведения операций калькулятора +, -, *, /
+    function operation() {
         op.forEach((item) => {
-            item.addEventListener("click", function (e) {
-                // Вот тут у нас должна находится логика
-                // которая обрабатывает нажание ни клавиши операций
+            item.addEventListener('click', function (e) {
+                // логика, которая обрабатывает нажатие на клавиши операций
                 let currentOp = e.target.innerText;
                 if (newOperation) {
+                    // push в log  введенных пользователем чисел и операций для
+                    // отображения в history
                     log.push(display.value);
                     log.push(currentOp);
                     newOperation = false;
@@ -206,12 +207,12 @@
                 //когда пользователь вводит следующее число запятая сбрасывается
                 flagDecimal = false;
                 if (newNumber && currentOperation !== '=') {
+                    // отображение текущего числа на дисплее
                     display.value = currentNum;
                 } else {
                     newNumber = true;
                     if (currentOperation === '+') {
                         currentNum += parseFloat(display.value);
-                        console.log(typeof currentNum);
                     } else if (currentOperation === '-') {
                         currentNum -= parseFloat(display.value);
                     } else if (currentOperation === '*') {
@@ -219,15 +220,16 @@
                     } else if (currentOperation === '/') {
                         currentNum /= parseFloat(display.value);
                     } else {
-                        currentNum = parseFloat(display.value);
+                        currentNum = parseFloat(display.value); // иначе "равно"
                     }
                     if (currentOp === '=' && currentOperation !== '=') {
                         log.push(currentNum);
                     }
+                    // отображение текущего числа
                     display.value = currentNum;
+                    // в переменную сохраняем операторы
                     currentOperation = currentOp;
                 }
-
                 showHistory();
             });
         });
@@ -235,6 +237,7 @@
 
     console.log(operation());
 
+    // функция десятичная точка
     function decimal() {
         dec.addEventListener('click', function (e) {
             flagDecimal = true;
@@ -243,6 +246,7 @@
 
     console.log(decimal(num));
 
+    //Функция очистки дисплея
     function clearAll() {
         clear.addEventListener('click', function (e) {
             if (e.target.innerText === 'C') {
