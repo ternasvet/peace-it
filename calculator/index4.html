@@ -16,7 +16,7 @@
 
         .history {
             background: #e5e5e5;
-            height: 35px;
+            min-height: 35px;
             line-height: 35px;
             text-align: right;
             padding-right: 10px;
@@ -126,25 +126,21 @@
     // Поле для вывода истории операций
     let history = document.querySelector('.history');
     // Поле для вывода текущего значения, это может быть как число
-    // так и операнд +,-,*,\
+    // так и оператор +,-,*,\
     let display = document.getElementById('elem-num_display');
-    // это обвертка для чисел на калькуляторе
     let number = document.querySelectorAll('.number');
     let op = document.querySelectorAll('.op');
-    //запятая
     let dec = document.getElementById('decimal');
     //полный сброс
     let clear = document.getElementById('c');
-    //кнопка =
-    let result = document.querySelector('#result');
 
     //введенное пользователем число
     let currentNum = 0;
-    //булево значение, ввел ли пользователь новое число после операнда
+    //булево значение, ввел ли пользователь новое число после оператора
     let newNumber = true;
 
     let flagDecimal = false;
-    //для того чтобы ввелась одна операция в log
+    //для того, чтобы ввелась одна операция в log
     let newOperation = true;
     //введенная пользователем операция
     let currentOperation = '';
@@ -202,12 +198,23 @@
                     log.push(display.value);
                     log.push(allOp);
                     newOperation = false;
+                } else {
+                    if (['+', '-', '*', '/'].indexOf(log[log.length - 1]) !== -1)
+                    {
+                        log[log.length - 1] = allOp;
+                    } else {
+                        if (allOp !== '=') {
+                            log.push(allOp);
+                        }
+                    }
                 }
                 //когда пользователь вводит следующее число запятая сбрасывается
                 flagDecimal = false;
                 if (newNumber && currentOperation !== '=') {
                     // отображение текущего числа на дисплее
                     display.value = currentNum;
+                    // в переменную сохраняем операторы
+                    currentOperation = allOp;
                 } else {
                     newNumber = true;
                     if (currentOperation === '+') {
@@ -249,6 +256,8 @@
     function clearAll() {
         clear.addEventListener('click', function (e) {
             if (e.target.innerText === 'C') {
+                currentNum = 0;
+                display.value = 0;
                 display.value = '0';
                 newNumber = true;
                 flagDecimal = false;
@@ -261,7 +270,7 @@
     clearAll();
 
     function showHistory() {
-        history.innerHTML = log.join('');
+        history.innerHTML = log.join(' ');
     }
 
 </script>
