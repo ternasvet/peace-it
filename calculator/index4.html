@@ -195,15 +195,14 @@
         op.forEach((item) => {
             item.addEventListener('click', function (e) {
                 // логика, которая обрабатывает нажатие на клавиши операций
-                let currentOp = e.target.innerText;
+                let allOp = e.target.innerText;
                 if (newOperation) {
                     // push в log  введенных пользователем чисел и операций для
                     // отображения в history
                     log.push(display.value);
-                    log.push(currentOp);
+                    log.push(allOp);
                     newOperation = false;
                 }
-
                 //когда пользователь вводит следующее число запятая сбрасывается
                 flagDecimal = false;
                 if (newNumber && currentOperation !== '=') {
@@ -222,13 +221,13 @@
                     } else {
                         currentNum = parseFloat(display.value); // иначе "равно"
                     }
-                    if (currentOp === '=' && currentOperation !== '=') {
+                    if (allOp === '=' && currentOperation !== '=') {
                         log.push(currentNum);
                     }
                     // отображение текущего числа
                     display.value = currentNum;
                     // в переменную сохраняем операторы
-                    currentOperation = currentOp;
+                    currentOperation = allOp;
                 }
                 showHistory();
             });
