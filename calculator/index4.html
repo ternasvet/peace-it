@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator v4</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .calculator {
+            width: 300px;
+            background: #cfcfcf;
+            margin: 0 auto;
+        }
+
+        .history {
+            background: #e5e5e5;
+            height: 35px;
+            line-height: 35px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        #elem-num_display {
+            background: #a5a5a5;
+            width: 290px;
+            height: 45px;
+            line-height: 45px;
+            font-size: 24px;
+            text-align: right;
+            padding-right: 10px;
+            margin: 5px 5px 2px;
+        }
+
+        input[value="0"] {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .input-num {
+            display: flex;
+
+        }
+
+        .input-num .numbers {
+            display: flex;
+            flex-wrap: wrap;
+            width: 75%;
+        }
+
+        .input-num .numbers .number, #decimal {
+            margin: 3px;
+            width: 30%;
+            text-align: center;
+            background: #e5e5e5;
+            padding: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .input-num .numbers .number:hover, #decimal:hover {
+            background: #c6c6c6;
+        }
+
+        .input-num .operations {
+            flex: 1 1 25%;
+            flex-direction: column;
+        }
+
+        .input-num .operations .op, #result {
+            margin: 3px;
+            text-align: center;
+            background: #e5e5e5;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .input-num .operations .op:hover {
+            background: #c6c6c6;
+        }
+
+        .input-num .numbers #c:hover {
+            background: red;
+            color: #fff;
+        }
+
+        #result:hover {
+            background: #ffa500;
+        }
+    </style>
+
+</head>
+<body>
+<div class="calculator">
+    <div class="history"></div>
+    <input id="elem-num_display" value="0" disabled>
+    <div class="input-num">
+        <div class="numbers">
+            <div class="number">7</div>
+            <div class="number">8</div>
+            <div class="number">9</div>
+            <div class="number">4</div>
+            <div class="number">5</div>
+            <div class="number">6</div>
+            <div class="number">1</div>
+            <div class="number">2</div>
+            <div class="number">3</div>
+            <div class="number" id="c">C</div>
+            <div class="number">0</div>
+            <div id="decimal">,</div>
+        </div>
+        <div class="operations">
+            <div class="op">/</div>
+            <div class="op">*</div>
+            <div class="op">-</div>
+            <div class="op">+</div>
+            <div class="op" id="result">=</div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Поле для вывода истории операций
+    let history = document.querySelector('.history');
+    // Поле для вывода текущего значения, это может быть как число
+    // так и операнд +,-,*,\
+    let display = document.getElementById('elem-num_display');
+    // это обвертка для чисел на калькуляторе
+    let number = document.querySelectorAll('.number');
+    let op = document.querySelectorAll('.op');
+    //запятая
+    let dec = document.getElementById('decimal');
+    //полный сброс
+    let clear = document.getElementById('c');
+    //кнопка =
+    let result = document.querySelector('#result');
+
+    //введенное пользователем число
+    let currentNum = 0;
+    //булево значение, ввел ли пользователь новое число после операнда
+    let newNumber = true;
+    let flagDecimal = false;
+    //для того чтобы ввелась одна операция в log
+    let newOperation = true;
+    //введенная пользователем операция
+    let currentOperation = '';
+
+    let log = [];
+
+    function num() {
+        number.forEach((item) => {
+            item.addEventListener("click", function (e) {
+                // Вот тут у нас должна находится логика
+                // которая обрабатывает нажатие на клавиши цифр
+                let num = e.target.innerText;
+                //
+                newOperation = true;
+                if (newNumber) {
+                    //если true, то добавляем числа после запятой
+                    if (flagDecimal) {
+                        display.value = '0.' + num;
+                    } else {
+                        display.value = num;
+                    }
+                    newNumber = false;
+                } else {
+                    if (display.value === '0') {
+                        if (flagDecimal) {
+                            display.value = '0.' + num;
+                        } else {
+                            display.value = num;
+                        }
+                    } else {
+                        let val = parseFloat(display.value);
+                        if (flagDecimal && display.value.indexOf('.') === -1) {
+                            display.value = val + '.' + num;
+                        } else {
+                            display.value += num;
+                        }
+                    }
+                }
+                showHistory();
+            });
+
+        });
+    }
+
+    console.log(num());
+
+    function operation() {
+
+        op.forEach((item) => {
+            item.addEventListener("click", function (e) {
+                // Вот тут у нас должна находится логика
+                // которая обрабатывает нажание ни клавиши операций
+                let currentOp = e.target.innerText;
+                if (newOperation) {
+                    log.push(display.value);
+                    log.push(currentOp);
+                    newOperation = false;
+                }
+
+                //когда пользователь вводит следующее число запятая сбрасывается
+                flagDecimal = false;
+                if (newNumber && currentOperation !== '=') {
+                    display.value = currentNum;
+                } else {
+                    newNumber = true;
+                    if (currentOperation === '+') {
+                        currentNum += parseFloat(display.value);
+                        console.log(typeof currentNum);
+                    } else if (currentOperation === '-') {
+                        currentNum -= parseFloat(display.value);
+                    } else if (currentOperation === '*') {
+                        currentNum *= parseFloat(display.value);
+                    } else if (currentOperation === '/') {
+                        currentNum /= parseFloat(display.value);
+                    } else {
+                        currentNum = parseFloat(display.value);
+                    }
+                    if (currentOp === '=' && currentOperation !== '=') {
+                        log.push(currentNum);
+                    }
+                    display.value = currentNum;
+                    currentOperation = currentOp;
+                }
+
+                showHistory();
+            });
+        });
+    }
+
+    console.log(operation());
+
+    function decimal() {
+        dec.addEventListener('click', function (e) {
+            flagDecimal = true;
+        });
+    }
+
+    console.log(decimal(num));
+
+    function clearAll() {
+        clear.addEventListener('click', function (e) {
+            if (e.target.innerText === 'C') {
+                display.value = '0';
+                newNumber = true;
+                flagDecimal = false;
+                log = [];
+                showHistory();
+            }
+        });
+    }
+
+    clearAll();
+
+    function showHistory() {
+        history.innerHTML = log.join('');
+    }
+
+</script>
+</body>
+</html>

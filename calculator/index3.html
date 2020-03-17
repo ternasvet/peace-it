@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator v3</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .calculator {
+            width: 300px;
+
+            background: #cfcfcf;
+            margin: 0 auto;
+        }
+
+        .history {
+            background: #e5e5e5;
+            height: 30px;
+            line-height: 30px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .elem-num {
+            background: #c6c6c6;
+            height: 45px;
+            line-height: 45px;
+            font-size: 24px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .input {
+            display: flex;
+
+        }
+
+        .input .numbers {
+            display: flex;
+            flex-wrap: wrap;
+            width: 75%;
+        }
+
+        .input .numbers .number {
+            margin: 3px;
+            width: 30%;
+            text-align: center;
+            background: #e5e5e5;
+            padding: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .input .numbers .number:hover {
+            background: #c6c6c6;
+        }
+
+        .input .operations {
+            flex: 1 1 25%;
+            flex-direction: column;
+        }
+
+        .input .operations .op {
+            margin: 3px;
+            text-align: center;
+            background: #e5e5e5;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .input .operations .op:hover {
+            background: #c6c6c6;
+        }
+    </style>
+
+</head>
+<body>
+<div class="calculator">
+    <div class="history"></div>
+    <div class="elem-num">0</div>
+    <div class="input">
+        <div class="numbers">
+            <div class="number">7</div>
+            <div class="number">8</div>
+            <div class="number">9</div>
+            <div class="number">4</div>
+            <div class="number">5</div>
+            <div class="number">6</div>
+            <div class="number">1</div>
+            <div class="number">2</div>
+            <div class="number">3</div>
+            <div class="number" id="c">clear</div>
+            <div class="number">0</div>
+            <div class="number decimal">,</div>
+        </div>
+        <div class="operations">
+            <div class="op">/</div>
+            <div class="op">*</div>
+            <div class="op">-</div>
+            <div class="op">+</div>
+            <div class="op" id="result">=</div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Поле для вывода истории операций
+    let history = document.querySelector('.history');
+    // Поле для вывода текущего значения, это может быть как число
+    // так и операнд +,-,*,\
+    let elemNum = document.querySelector('.elem-num');
+    // это обвертка для чисел на калькуляторе
+    //let numbers = document.querySelectorAll('.numbers');
+    let number = document.querySelectorAll('.number');
+    let op = document.querySelectorAll('.op');
+    // это обвертка для кнопок с операциями
+    //let operations = document.querySelectorAll('.operations');
+    //запятая
+    let decimal = document.querySelector('.decimal');
+    //полный сброс
+    let clear = document.getElementById('c');
+    //кропка =
+    let result = document.querySelector('#result');
+
+
+    //переменная для истории введенных чисел и операций до равно
+    let tmp = '';
+    //введенная пользователем операция
+    let currentOp = '';
+    //введенное пользователем число
+    let currentNum = 0;
+
+    let arrLog = [];
+
+    number.forEach((item) => {
+        item.addEventListener("click", function (e) {
+            // Вот тут у нас должна находится логика
+            // которая обрабатывает нажатие на клавиши цифр
+            let num = e.target.innerText;
+            if (currentOp !== '') {
+                // что должно произойти если оператор не пустой
+                arrLog.push(currentOp);
+                tmp = '';
+            }
+            if (currentNum == 0) {
+                currentNum = num;
+
+            } else {
+                currentNum += num;
+            }
+            // временная переменная
+            tmp += num;
+
+            showHistory();
+            showNumber();
+        });
+
+    });
+
+    op.forEach((item) => {
+        item.addEventListener("click", function (e) {
+            // Вот тут у нас должна находится логика
+            // которая обрабатывает нажание ни клавиши операций
+            currentOp = e.target.innerText;
+            if (currentNum !== 0) {
+                arrLog.push(currentNum);
+                tmp = '';
+                //сбрасываем на дефолтное (по умолчанию значение)
+                currentNum = 0;
+            }
+            tmp = currentOp;
+            showHistory();
+            showNumber();
+        });
+    });
+
+    function clearAll (){
+
+    }
+
+    clear.addEventListener('click', function (e) {
+        console.log(e.target.id);
+        console.log('Полное очищение c');
+    });
+
+    decimal.addEventListener('click', function (e) {
+        console.log('Клик по запятой');
+    });
+
+
+
+    result.addEventListener('click', function (e) {
+        console.log('Равно');
+    });
+
+    function showHistory() {
+        history.innerHTML = arrLog.join('') + tmp;
+
+    }
+
+    function showNumber() {
+        elemNum.innerHTML = tmp;
+    }
+
+</script>
+</body>
+</html>
