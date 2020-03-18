@@ -56,18 +56,17 @@
         }
         if (Array.isArray(arr)) {
             arr.forEach((item) => {
-                    let tr = document.createElement('tr');
+                let tr = document.createElement('tr');
 
-                    columnNames.forEach((key) => {
-                        let td = document.createElement('td');
-                        if (item[key] !== undefined) {
-                            td.innerText = item[key];
-                        }
-                        tr.append(td);
-                    });
-                    table.append(tr);
-                }
-            );
+                columnNames.forEach((key) => {
+                    let td = document.createElement('td');
+                    if (item[key] !== undefined) {
+                        td.innerText = item[key];
+                    }
+                    tr.append(td);
+                });
+                table.append(tr);
+            });
         }
         document.body.append(table);
     }
