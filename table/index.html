@@ -45,7 +45,7 @@
         table.classList.add('table-dark', 'table-bordered', 'table');
         let tr2 = document.createElement('tr');
 
-        let columnNames = getColums(arr);
+        let columnNames = getColumns(arr);
         if (Array.isArray(columnNames)) {
             columnNames.forEach((item) => {
                 let th = document.createElement('th');
@@ -71,7 +71,7 @@
         document.body.append(table);
     }
 
-    function getColums(arr) {
+    function getColumns(arr) {
         let newArr = [];
         arr.forEach((item) => {
             if (typeof item === 'object') {
