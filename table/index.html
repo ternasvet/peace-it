@@ -42,7 +42,7 @@
 
     function table(arr) {
         let table = document.createElement('table');
-        table.classList.add('table-dark', 'table');
+        table.classList.add('table-dark', 'table-bordered', 'table');
         let tr2 = document.createElement('tr');
 
         let columnNames = getColums(arr);
@@ -57,15 +57,14 @@
         if (Array.isArray(arr)) {
             arr.forEach((item) => {
                     let tr = document.createElement('tr');
-                    if (typeof item === 'object') {
-                        columnNames.forEach((key) => {
-                            let td = document.createElement('td');
-                            if (item[key] !== undefined) {
-                                td.innerText = item[key];
-                            }
-                            tr.append(td);
-                        });
-                    }
+
+                    columnNames.forEach((key) => {
+                        let td = document.createElement('td');
+                        if (item[key] !== undefined) {
+                            td.innerText = item[key];
+                        }
+                        tr.append(td);
+                    });
                     table.append(tr);
                 }
             );
@@ -76,9 +75,11 @@
     function getColums(arr) {
         let newArr = [];
         arr.forEach((item) => {
-            for (let key in item) {
-                if (!newArr.includes(key)) {
-                    newArr.push(key);
+            if (typeof item === 'object') {
+                for (let key in item) {
+                    if (!newArr.includes(key)) {
+                        newArr.push(key);
+                    }
                 }
             }
         });
