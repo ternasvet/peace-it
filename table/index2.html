@@ -227,9 +227,7 @@
 
                 columnNames.forEach((key) => {
                     let td = document.createElement('td');
-                    if (item[key] !== undefined) {
-                        td.innerText = item[key];
-                    }
+                    td.innerText = item[key] || '';
                     tr.append(td);
                 });
                 table.append(tr);
