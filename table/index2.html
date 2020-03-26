@@ -174,17 +174,17 @@
         let modalData = {};
 
         modalButton.addEventListener('click', function () {
-            modal.style.display = 'flex';
+            showModal();
         });
         //модальное окно закрывается на клик за пределами модального окна
         modal.addEventListener('click', function (e) {
             if (e.target === modal) {
-                modal.style.display = 'none';
+                closeModal();
             }
         });
         //модальное окно закрывается на клик x
         closeButton.addEventListener('click', function () {
-            modal.style.display = 'none';
+            closeModal();
         });
 
         modalAddButton.addEventListener('click', function () {
@@ -252,6 +252,10 @@
         });
 
         return columns;
+    }
+
+    function showModal() {
+        modal.style.display = 'flex';
     }
 
     function closeModal() {
