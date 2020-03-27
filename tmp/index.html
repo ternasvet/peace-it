@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>table</title>
+    <style>
+        .modal-background {
+            width: 100%;
+            height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .myModal {
+            background: #fefefe;
+            margin: 15% auto;
+            padding: 15px;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            min-height: 500px;
+            position: relative;
+
+        }
+
+        .myModal-content {
+        }
+
+        .myModal-header {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .close {
+            color: #aaaaaa;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .myModal-header {
+            display: flex;
+        }
+
+        .btn-create {
+            color: #39739d;
+            background-color: #E1ECF4;
+            border: 1px solid #96bdd9;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 0 #f4f8fb;
+            text-decoration: none;
+            width: 80px;
+            position: absolute;
+            bottom: 15px;
+            right: 30px;
+        }
+
+        .table {
+            width: 600px;
+        }
+
+        .out {
+            height: 200px;
+            background: #cccccc;
+            flex-basis: 400px;
+            margin: 90px 0 0 130px;
+            justify-content: center;
+        }
+
+        .modal-add-button {
+            display: flex;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Table</h1>
+    <div id="modal" class="modal-background">
+        <div class="myModal">
+            <div class="myModal-header">
+                <span class="close">&times</span>
+            </div>
+            <div class="myModal-content">
+                <div class="row">
+                    <div class="col-md-5">Enter title <input type="text" class="input-key"></div>
+                    <div class="col-md-5">Enter value <input type="text" class="input-value"></div>
+                    <div class="col-md-2 modal-add-button">
+                        <button class="btn-tbl btn btn-success">Enter</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="out col-md-12"></div>
+                </div>
+
+            </div>
+            <button class="btn-create">Create</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+    let arr = [{
+        name: 'Don',
+        surname: 'Smith',
+        age: 25,
+        country: 'Ukraine',
+        male: 'man'
+    }, {
+        name: 'Mikle',
+        surname: 'Miller',
+        age: '',
+        country: 'Germany'
+    }, {
+        name: 'Michael',
+        surname: 'Kors',
+        age: 60,
+        country: 'USA',
+        male: ''
+    }, {
+        name: 'Denis',
+        surname: '',
+        age: 32,
+        country: '',
+        male: 'man'
+    }, {
+        name: 'Shani',
+        surname: 'Mizrachi',
+        age: 34,
+        country: 'Israel',
+        male: 'women'
+    }
+    ];
+
+    class TableObj {
+        constructor(arr) {
+            this.arr = arr;
+            this.columns = [];
+            this.modalData = {};
+
+            // Инициализация переменных для работы с DOM
+            this.init();
+            this.events();
+        }
+
+        init() {
+            // Модальное окно
+            this.modal = document.querySelector('.modal-background');
+            this.closeButton = document.querySelector('.close');
+            this.modalInputKey = document.querySelector('.myModal .input-key');
+            this.modalInputValue = document.querySelector('.myModal .input-value');
+            this.modalAddButton = document.querySelector('.myModal .btn-tbl');
+            this.modalCreateButton = document.querySelector('.myModal .btn-create');
+            this.outText = document.querySelector('.out');
+
+            // Таблица с кнопками
+            this.wrapper = document.createElement('div');
+            this.wrapper.classList.add('wrapper');
+
+            this.modalButton = document.createElement('button');
+            this.modalButton.innerText = 'Открыть модальное окно для добавления элементов';
+
+            this.table = document.createElement('table');
+            this.table.classList.add('table-dark', 'table-bordered', 'table');
+
+            this.wrapper.append(this.modalButton);
+            this.wrapper.append(this.table);
+
+            this.output();
+        }
+
+        events() {
+            // в переменную записываем this для контекста внутри функций
+            let me = this;
+            //по клику вызываем модальное окно
+            this.modalButton.addEventListener('click', function () {
+                me.showModal();
+            });
+            //модальное окно закрывается на клик за пределами модального окна
+            this.modal.addEventListener('click', function (e) {
+                if (e.target === me.modal) {
+                    me.closeModal();
+                }
+            });
+            //модальное окно закрывается на клик x
+            this.closeButton.addEventListener('click', function () {
+                me.closeModal();
+            });
+
+            this.modalAddButton.addEventListener('click', function () {
+                let key = me.modalInputKey.value;
+                let value = me.modalInputValue.value;
+
+                if (key && value) {
+                    me.modalData[key] = value;
+
+                    me.modalInputKey.value = '';
+                    me.modalInputValue.value = '';
+                    me.outText.innerHTML += `${key}: ${me.modalData[key]}<br>`;
+                }
+            });
+
+            this.modalCreateButton.addEventListener('click', function () {
+                me.arr.push(me.modalData);
+                me.render();
+
+                me.modalData = {};
+                me.closeModal();
+                me.outText.innerHTML = '';
+            });
+        }
+
+        showModal() {
+            this.modal.style.display = 'flex';
+        }
+
+        closeModal() {
+            this.modal.style.display = 'none';
+        }
+
+        render() {
+            this.columns = this.getColumns();
+            this.table.innerHTML = '';
+
+            let tr2 = document.createElement('tr');
+
+            this.columns.forEach((item) => {
+                let th = document.createElement('th');
+                th.innerText = item;
+                tr2.append(th);
+            });
+            this.table.prepend(tr2);
+
+            this.arr.forEach((item) => {
+                let tr = document.createElement('tr');
+
+                this.columns.forEach((key) => {
+                    let td = document.createElement('td');
+                        td.innerText = item[key] || '';
+                    tr.append(td);
+                });
+                this.table.append(tr);
+            });
+        }
+
+        output() {
+            document.body.append(this.wrapper);
+        }
+
+        getColumns() {
+            let columns = [];
+            this.arr.forEach((item) => {
+                if (typeof item === 'object') {
+                    for (let key in item) {
+                        if (!columns.includes(key)) {
+                            columns.push(key);
+                        }
+                    }
+                }
+            });
+
+            return columns;
+        }
+    }
+
+    let table1 = new TableObj(arr);
+    table1.render();
+
+</script>
+</body>
+</html>
