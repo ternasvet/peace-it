@@ -29,6 +29,7 @@
 //     male: 'women'
 // }
 // ];
+
 // Модальное окно
 let modal = document.querySelector('.modal-background');
 let closeButton = document.querySelector('.close');
@@ -91,6 +92,8 @@ function tableObj(arr) {
 }
 
 function render(arr) {
+    let countPage = 5;
+    let page = 1;
     table.innerHTML = '';
     let tr2 = document.createElement('tr');
     let columnNames = getColumns(arr);
@@ -101,20 +104,23 @@ function render(arr) {
             tr2.append(th);
         });
         table.prepend(tr2);
+        paginationPage(arr);
     }
     if (Array.isArray(arr)) {
-        arr.forEach((item) => {
-            let tr = document.createElement('tr');
+        arr.slice(countPage * (page - 1), countPage * page).forEach((item) => {
+            arr.forEach((item) => {
+                let tr = document.createElement('tr');
 
-            columnNames.forEach((key) => {
-                let td = document.createElement('td');
-                td.innerText = item[key] || '';
-                tr.append(td);
+                columnNames.forEach((key) => {
+                    let td = document.createElement('td');
+                    td.innerText = item[key] || '';
+                    tr.append(td);
+                });
+                table.append(tr);
             });
-            table.append(tr);
-
+            paginationPage();
         });
-        //paginationPage(arr);
+
     }
 
     document.body.append(table);
@@ -163,32 +169,32 @@ fetch('https://jsonplaceholder.typicode.com/albums/1/photos')
     });
 
 //
-// function paginationPage(arr) {
-//     let pagerWrapper = document.createElement('div');
-//     pagerWrapper.classList.add('pager-wrapper');
-//
-//     let countPage = 5;
-//     //let page = 1;
-//     let pageAll = Math.ceil(arr.length / countPage); //кол-во страниц
-//     let pagerElems = [];
-//     for (let i = 0; i < pageAll; i++) {
-//         let pagerItem = document.createElement('span');
-//         pagerItem.innerHTML = i + 1;
-//         pagerItem.classList.add('pager-item');
-//         console.log(pagerItem.innerHTML);
-//         pagerItem.addEventListener('click', function () {
-//             let page = Number(this.innerHTML);
-//             console.log(page);
-//             this.page = page;
-//             render();
-//         });
-//
-//         pagerElems.push(pagerItem);
-//         pagerWrapper.append(pagerItem);
-//     }
-//
-//     wrapper.append(pagerWrapper);
-// }
+function paginationPage(arr) {
+    let pagerWrapper = document.createElement('div');
+    pagerWrapper.classList.add('pager-wrapper');
+
+    let countPage = 5;
+    //let page = 1;
+    let pageAll = Math.ceil(arr.length / countPage); //кол-во страниц
+    let pagerElems = [];
+    for (let i = 0; i < pageAll; i++) {
+        let pagerItem = document.createElement('span');
+        pagerItem.innerHTML = i + 1;
+        pagerItem.classList.add('pager-item');
+        console.log(pagerItem.innerHTML);
+        pagerItem.addEventListener('click', function () {
+            let page = Number(pagerItem.innerHTML);
+            console.log(page);
+            this.page = page;
+            render();
+        });
+
+        pagerElems.push(pagerItem);
+        pagerWrapper.append(pagerItem);
+    }
+
+    wrapper.append(pagerWrapper);
+}
 
 
 //paginationPage(arr);
