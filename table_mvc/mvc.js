@@ -83,16 +83,6 @@ let TableView = function (model) {
                     result += `<td></td>`;
                 }
 
-
-                // if (Array.isArray(columnNames)) {
-                //     columnNames.forEach((item) => {
-                //         let th = document.createElement('th');
-                //         th.innerText = item;
-                //         tr2.append(th);
-                //     });
-                //     table.prepend(tr2);
-                // }
-
             });
             result += `</tr>`;
         });
