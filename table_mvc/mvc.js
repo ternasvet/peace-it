@@ -29,11 +29,6 @@ let arr = [{
     male: 'women'
 }
 ];
-let TableController = function (TableModel, TableView) {
-    this.TableModel = TableModel;
-    this.TableView = TableView;
-};
-
 let TableModel = function (data) {
     this.data = data;
     this.columns = [];
@@ -70,28 +65,60 @@ let TableView = function (model) {
     };
 
     this.render = function () {
-        let data = this.model.data;
-        let columns = this.model.columns;
-        let result = `<table>`;
-        data.forEach((row) => {
-            result += `<tr>`;
-            columns.forEach((key) => {
-                if (row.hasOwnProperty(key)) {
-                    result += `<th>${key}</th>`;
-                    result += `<td>${row[key]}</td>`;
-                } else {
-                    result += `<td></td>`;
-                }
-
-            });
-            result += `</tr>`;
-        });
-        result += `</table>`;
-
-        return result;
+        return this.TABLE(this.model.data);
     };
-    let self = this;
-    this.model.div.innerHTML = self.render();
+
+    this.TABLE = function (data) {
+        let self = this;
+        let table = document.createElement('table');
+        let tr = document.createElement('tr');
+        this.model.columns.forEach((key) => {
+            let th = document.createElement('th');
+            th.innerHTML = key;
+            tr.append(th);
+        });
+        table.append(tr);
+        data.forEach(function (row) {
+            console.log(row);
+            let tr = self.TR(row);
+            table.append(tr);
+
+        });
+        return table;
+    };
+
+    this.TR = function (row) {
+        if (typeof row !== 'object') {
+            return;
+        }
+        let tr = document.createElement('tr');
+        this.model.columns.forEach((key) => {
+            if (row.hasOwnProperty(key)) {
+                let td = this.TD(row[key]);
+                tr.append(td);
+            } else {
+                let td = this.TD('');
+                tr.append(td);
+            }
+        });
+
+        tr.addEventListener("click", function () {
+            console.log(item);
+        });
+
+        return tr;
+    };
+
+    this.TD = function (item) {
+        let td = document.createElement('td');
+        td.innerHTML = item;
+        td.addEventListener('click', function () {
+            console.log(item);
+        });
+        return td;
+    };
+
+    this.model.div.append(this.render())
 
 };
 
