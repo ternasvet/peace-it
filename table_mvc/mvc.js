@@ -49,6 +49,7 @@ let TableModel = function (data) {
     };
 
     this.add = function (item) {
+        console.log(item);
         this.data.push(item);
         this.getColumns();
     };
@@ -103,7 +104,7 @@ let TableView = function (model) {
         });
 
         tr.addEventListener("click", function () {
-            console.log(item);
+            console.log(row);
         });
 
         return tr;

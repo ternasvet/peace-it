@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>New table</title>
+</head>
+<body>
+<script>
+
+    let arr = [{
+        name: 'Don',
+        surname: 'Smith',
+        age: 25,
+        country: 'Ukraine',
+        male: 'man'
+    }, {
+        name: 'Mikle',
+        surname: 'Miller',
+        age: '',
+        country: 'Germany'
+    }, {
+        name: 'Michael',
+        surname: 'Kors',
+        age: 60,
+        country: 'USA',
+        male: ''
+    }, {
+        name: 'Denis',
+        surname: '',
+        age: 32,
+        country: '',
+        male: 'man'
+    }, {
+        name: 'Shani',
+        surname: 'Mizrachi',
+        age: 34,
+        country: 'Israel',
+        male: 'women'
+    }
+    ];
+
+    let TableView = function (arr, cb) {
+        const obj = {};
+        obj.cb = cb;
+        obj.arr = arr;
+        obj.table = function (arr) {
+            let columns = this.getColumns(arr);
+            let table = document.createElement('table');
+            table.className = 'table';
+            let self = this;
+            arr.forEach((item) => {
+                self.createTr(item, columns, table);
+            });
+
+            this.createHr(columns, table);
+            document.body.append(table);
+        };
+
+        obj.createTr = function (item, columns, table) {
+            let tr = document.createElement('tr');
+            table.append(tr);
+            let self = this;
+            columns.forEach((key) => {
+                if (item.hasOwnProperty(key)) {
+                    self.createTd(tr, item[key], self.cb, item)
+                } else {
+                    self.createTd(tr, '', self.cb, item);
+                }
+            });
+        };
+
+        obj.createTd = function (tr, key, cbTr, item) {
+            let td = document.createElement('td');
+            tr.append(td);
+            td.innerText = key;
+            td.onclick = function () {
+                cbTr(key, item);
+
+            }
+        };
+
+        obj.createHr = function (columns, table) {
+            let tr = document.createElement('tr');
+            columns.forEach((item) => {
+                let th = document.createElement('th');
+                th.innerText = item;
+                tr.append(th);
+            });
+            table.prepend(tr);
+        };
+
+        obj.render = function () {
+            this.table(this.arr);
+        };
+
+        obj.getColumns = function (arr) {
+            let columns = [];
+            arr.forEach((item) => {
+                if (typeof item === 'object') {
+                    for (let key in item) {
+                        if (!columns.includes(key)) {
+                            columns.push(key);
+                        }
+                    }
+                }
+            });
+
+            return columns;
+        };
+
+        return obj;
+    };
+    let clb = (clickValue, clickTr) => console.log(clickTr, clickValue);
+    let table = TableView(arr, clb);
+    table.render();
+    console.log(table);
+
+
+</script>
+</body>
+</html>

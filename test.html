@@ -21,71 +21,57 @@
 </head>
 <body>
 <script>
-    let arr = [{
-        name: 'Don',
-        surname: 'Smith',
-        age: 25,
-        country: 'Ukraine',
-        male: 'man'
-    }, {
-        name: 'Mikle',
-        surname: 'Miller',
-        age: '',
-        country: 'Germany'
-    }, {
-        name: 'Michael',
-        surname: 'Kors',
-        age: 25,
-        country: 'USA',
-        male: ''
-    }];
-
-    function table(arr) {
-        let table = document.createElement('table');
-        table.classList.add('table-dark', 'table');
-        let tr2 = document.createElement('tr');
-
-        let columnNames = getColums(arr);
-        if (Array.isArray(columnNames)) {
-            columnNames.forEach((item) => {
-                let th = document.createElement('th');
-                th.innerText = item;
-                tr2.append(th);
-            });
-            table.prepend(tr2);
+    function paginate(count, active, cbClick, mounted) {
+        let array = [];
+        for (let i = 0; i < count; i++){
+            array.push(i)
         }
-        if (Array.isArray(arr)) {
-            arr.forEach((item) => {
-                    let tr = document.createElement('tr');
-                    if (typeof item === 'object') {
-                        columnNames.forEach((key) => {
-                            let td = document.createElement('td');
-                            if (item[key] !== undefined) {
-                                td.innerText = item[key];
-                            }
-                            tr.append(td);
-                        });
-                    }
-                    table.append(tr);
-                }
-            );
-        }
-        document.body.append(table);
-    }
-
-    function getColums(arr) {
-        let newArr = [];
-        arr.forEach((item) => {
-            for (let key in item) {
-                if (!newArr.includes(key)) {
-                    newArr.push(key);
-                }
+        return {
+            buttonArray: array,
+            cbClick:cbClick,
+            element: document.querySelector(mounted),
+            click: function (number){
+                this.cbClick(number)
+            },
+            createButton: function () {
+                this.buttonArray = this.buttonArray.map(item => {
+                    return paginateItem(item + 1, active, this.click.bind(this));
+                });
+                this.buttonArray.forEach((item) => {
+                    this.element.append(item.render())
+                })
+            },
+            render: function(){
+                this.element.classList.add('paginate');
+                this.createButton();
+                return this
             }
-        });
-        return newArr;
+        }
     }
 
-    (table(arr));
+
+    function paginateItem(number, active, cbClick) {
+        const item = {
+            number: number,
+            isActive: active === number,
+            element: document.createElement('div'),
+            render:function () {
+                this.element.innerText = number;
+                this.element.classList.add('paginate-item');
+                if(this.isActive){
+                    this.element.classList.add('active-item');
+                }
+                this.element.onclick = function (event) {
+                    cbClick(number)
+                };
+                return this.element;
+            }
+        };
+        return item;
+    }
+
+    const test = paginate(10, 2, (clickElement) => console.log(clickElement), '#test');
+    console.log(test.render());
 </script>
 </body>
 </html>
