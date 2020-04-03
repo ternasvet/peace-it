@@ -114,7 +114,21 @@
     let clb = (clickValue, clickTr) => console.log(clickTr, clickValue);
     let table = TableView(arr, clb);
     table.render();
-    console.log(table);
+    //console.log(table);
+
+    function storage(arr){
+        arr.forEach((item)=>{
+            let myObjSer = JSON.stringify(item);
+            localStorage.setItem('myObj', myObjSer);
+            //console.log(localStorage);
+            let myObjParse = JSON.parse(localStorage.getItem('myObj'));
+            console.log(myObjParse);
+        });
+    }
+    storage(arr);
+
+
+
 
 
 </script>

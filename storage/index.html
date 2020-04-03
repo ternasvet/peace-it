@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>storage</title>
+    <ul>
+
+    </ul>
+    <button class="submit">Add</button>
+
 </head>
 <body>
 <script>
+    const ul = document.querySelector('ul');
+    const button = document.querySelector('.submit');
+    let testArr = localStorage.getItem('key');
+    if(testArr && typeof testArr === 'string'){
+        testArr = testArr.split(',')
+    }
+    const arr = testArr?testArr:[];
 
+    function getModel() {
+        ul.innerHTML = '';
+        for (let i = 0; i < arr.length; i++) {
+            const li = document.createElement('li');
+            li.innerText = i + 1;
+            ul.append(li);
+
+        }
+    }
+
+    function getButton() {
+        button.onclick = function (e) {
+            //ul.innerHTML = '';
+            arr.push(1);
+            localStorage.setItem('key', arr.toString());
+            getModel();
+        }
+    }
+    getButton();
+    getModel();
+    // localStorage.clear()
 </script>
 </body>
 </html>

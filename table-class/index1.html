@@ -185,6 +185,7 @@
             this.wrapper.append(this.table);
 
             this.output();
+
         }
 
         events() {
@@ -216,15 +217,18 @@
                     me.modalInputValue.value = '';
                     me.outText.innerHTML += `${key}: ${me.modalData[key]}<br>`;
                 }
+
             });
 
             this.modalCreateButton.addEventListener('click', function () {
                 me.arr.push(me.modalData);
-                me.render();
 
+                me.render();
                 me.modalData = {};
                 me.closeModal();
                 me.outText.innerHTML = '';
+
+                setDataForTable(me.arr);
             });
         }
 
@@ -250,6 +254,7 @@
             this.table.prepend(tr2);
 
             this.arr.forEach((item) => {
+
                 let tr = document.createElement('tr');
 
                 this.columns.forEach((key) => {
@@ -259,6 +264,7 @@
                 });
                 this.table.append(tr);
             });
+
         }
 
         output() {
@@ -268,6 +274,7 @@
         getColumns() {
             let columns = [];
             this.arr.forEach((item) => {
+
                 if (typeof item === 'object') {
                     for (let key in item) {
                         if (!columns.includes(key)) {
@@ -280,9 +287,23 @@
             return columns;
         }
     }
+    let table1 = new TableObj(getDataForTable(arr));
 
-    let table1 = new TableObj(arr);
     table1.render();
+
+    function getDataForTable(defaultData){
+       if (localStorage.getItem('myObj')) {
+           console.log(localStorage.getItem('myObj'));
+           return JSON.parse(localStorage.getItem('myObj'));
+       }
+
+       return defaultData;
+    }
+
+    function setDataForTable(data) {
+        localStorage.setItem('myObj', JSON.stringify(data));
+    }
+
 
 </script>
 </body>
