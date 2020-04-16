@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>table</title>
+    <style>
+        .paginate {
+            display: flex;
+        }
+
+        .paginate-item {
+            width: 50px;
+            height: 50px;
+            margin: 0 10px;
+            background: #39739d;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .active-item {
+            background: rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+<div id="test"></div>
+<script>
+
+    class Paginate {
+        buttonArray = [];
+        constructor(count, active, cbClick, mounted){
+            this.createButtonArray(count);
+            this.cbClick = cbClick;
+            this.active = active;
+            this.mounted = mounted;
+            this.element = {};
+            this.render()
+        }
+        createButtonArray (count) {
+            for (let i = 0; i < count; i++){
+                this.buttonArray.push(i)
+            }
+        }
+        click(number){
+            this.cbClick(number);
+        }
+        createButton(){
+            this.buttonArray = this.buttonArray.map(item => {
+                return new PaginateItem(item + 1, this.active, this.click.bind(this));
+            });
+            this.buttonArray.forEach((item) => {
+                this.element.append(item.element)
+            })
+        }
+        render(){
+            this.element = document.querySelector(this.mounted);
+            this.element.classList.add('paginate');
+            this.createButton();
+        }
+    }
+
+
+    class PaginateItem {
+        constructor(number, active, cbClick){
+            this.number = number;
+            this.cbClick = cbClick;
+            this.isActive = active === number;
+            this.element = document.createElement('div');
+            this.render()
+        }
+        render () {
+            this.element.innerText = this.number;
+            this.element.classList.add('paginate-item');
+            if(this.isActive){
+                this.element.classList.add('active-item');
+            }
+            this.element.onclick = () => {
+                this.cbClick(this.number);
+            };
+        }
+    }
+
+    const test = new Paginate(
+        10,
+        2,
+        (obj, itemValue) => console.log(obj),
+        '#test'
+    );
+    console.log(test)
+</script>
+</body>
+</html>

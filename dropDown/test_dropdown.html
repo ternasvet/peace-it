@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drop</title>
+    <style>
+        .btn {
+            margin: 30px 0 0 30px;
+            background-color: #3498DB;
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            outline: none;
+
+        }
+
+        .myContent {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        #item-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .myContent {
+            display: none;
+        }
+
+        .myContent.show {
+            display: block;
+        }
+
+        .active-item {
+            background-color: #3498DB;
+        }
+    </style>
+</head>
+<body>
+
+<div id="dropdown"></div>
+
+
+<script>
+    class DropDown {
+        items = [];
+
+        constructor(nameButton, mounted) {
+            this.nameButton = nameButton;
+            this.mounted = mounted;
+
+            this.button = document.createElement('button');
+            this.div = document.createElement('div');
+            this.createButton();
+            this.createDiv();
+            this.render();
+        }
+
+        createButton() {
+            this.button.classList.add('btn');
+            this.button.innerText = this.nameButton;
+
+            this.items.push(new DropDownItem('Link1', false));
+            this.items.push(new DropDownItem('link2', true));
+            this.items.push(new DropDownItem('link3', false));
+            this.items.push(new DropDownItem('link4', false));
+            this.items.push(new DropDownItem('link5', false));
+            this.items.push(new DropDownItem('link6', false));
+
+            this.items.forEach((item) => {
+                this.div.append(item.elementLink);
+            });
+
+            this.button.onclick = () => {
+                this.div.classList.toggle('show');
+            }
+
+        }
+
+        createDiv() {
+            this.div.classList.add('myContent');
+            this.div.setAttribute('id', 'item-content');
+        }
+
+        render() {
+            this.elementOut = document.querySelector(this.mounted);
+            this.elementOut.append(this.button);
+            this.elementOut.append(this.div);
+        }
+    }
+
+    class DropDownItem {
+        //active = true;
+        constructor(textItem, active) {
+            this.active = active;
+            this.textItem = textItem;
+            this.isActive = active === textItem;
+            this.elementLink = document.createElement('a');
+            if (this.active) {
+                this.elementLink.classList.add('active-item');
+            }
+            this.render();
+        }
+
+        render() {
+            this.elementLink.classList.add('item');
+            this.elementLink.href = '#';
+            this.elementLink.innerText = this.textItem;
+
+            // this.elementLink.onclick = (e) => {
+            //     this.elementLink.classList.add('active-item');
+            //     if(this.elementLink.classList.contains('active-item')){
+            //         this.elementLink.classList.remove('active-item');
+            //     }
+            // }
+
+
+        }
+    }
+
+    const dropdown = new DropDown('Dropdown', '#dropdown');
+    console.log(dropdown);
+
+</script>
+</body>
+</html>

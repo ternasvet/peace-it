@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>table</title>
+    <title>Dropdown</title>
+</head>
+<body>
+
+
+<!--<div class="dropdown">-->
+<!--    <button class="btn btn-default" id="dropdownMenu" type="button" data-toggle="dropdown" aria-expanded="false">-->
+<!--        Меню <span class="caret"></span>-->
+<!--    </button>-->
+<!--    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">-->
+<!--        <li role="presentation"><a role="menuitem" href="#">Сепулька</a></li>-->
+<!--        <li role="presentation" class="divider"></li>-->
+<!--        <li role="presentation"><a role="menuitem" href="#">Сепулькарии</a></li>-->
+<!--        <li role="presentation" class="divider"></li>-->
+<!--        <li role="presentation"><a role="menuitem" href="#">Сепуление</a></li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+
+<div id="dropdown"></div>
+
+<script>
+    class DropDown {
+        listArr = [];
+
+        constructor(list, cbClick, mounted) {
+            this.createList(list);
+            this.cbClick = cbClick;
+            this.mounted = mounted;
+
+            //здесь будет списочек
+            //this.element = {};
+            this.render();
+        }
+
+        createList(list) {
+            for (let i = 0; i < list; i++) {
+                this.listArr.push(i);
+                console.log(this.listArr);
+            }
+        }
+
+        createButton() {
+
+            // this.buttonArray = this.DropDownItem.map(item => {
+            //     return new PaginateItem();
+            // });
+            this.listArr.forEach((item) => {
+                console.log(this.listArr);
+                this.element.append(item.element);
+
+            });
+            return new DropDownItem();
+
+        }
+
+        render() {
+            this.element = document.querySelector(this.mounted);
+            this.element.classList.add('dropdownList');
+            this.button = document.createElement('button');
+            this.button.classList.add('btn');
+            document.getElementById("myDropdown").classList.toggle("show");
+            console.log(this.element);
+
+
+            console.log(button);
+
+            this.element.append(button);
+
+
+            this.createButton()
+        }
+
+    }
+
+    class DropDownItem {
+        constructor() {
+
+            console.log(button);
+            this.element = document.createElement('ul');
+            this.elementLi = document.createElement('li');
+
+            console.log(this.element);
+            console.log(this.elementLi);
+            this.render();
+        }
+
+        render() {
+
+
+            this.element.classList.add('dropListItem');
+            this.elementLi.classList.add('dropListLi');
+            this.element.append(this.elementLi);
+            this.elementLi.innerText = this.listItem;
+        }
+    }
+
+    const dropdown = new DropDown('list', (obj, itemValue) => console.log(obj), '#dropdown')
+    console.log(dropdown);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

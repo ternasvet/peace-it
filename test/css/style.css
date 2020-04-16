@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', 'Arial', 'Helvetica', sans-serif;
+    color: #565656;
+}
+
+.contentInner {
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+    width: 800px;
+    min-height: 500px;
+    background: #f5f5f5;
+    box-shadow: 1px 5px 10px -5px #000000;
+}
+
+/*Выпадающее меню*/
+.dropList {
+    margin-bottom: 40px;
+}
+
+ul#dropListMenu, ul.inner {
+    list-style: none;
+}
+
+ul#dropListMenu {
+    display: flex;
+    justify-content: center;
+}
+
+ul#dropListMenu > li a {
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+ul#dropListMenu li {
+    position: relative;
+    z-index: 5;
+}
+
+ul#dropListMenu > li {
+    background-color: #ccc;
+    border-right: 1px solid #a5a5a5;
+    width: 200px;
+}
+
+ul#dropListMenu > li:first-child {
+    border-left: 1px solid #a5a5a5;
+}
+
+
+#dropListMenu li a:hover {
+    background: #565656;
+    color: #fff;
+    box-shadow: 1px 5px 10px -5px #000000;
+    transition: all 0.2s ease;
+}
+
+#dropListMenu li ul {
+    background: #e5e5e5;
+    position: absolute;
+    min-width: 200px;
+    display: none;
+    left: -1px;
+}
+
+#dropListMenu li > ul li {
+    border: 1px solid #cfcfcf;
+    position: relative;
+}
+
+#dropListMenu li > ul li a {
+    padding: 15px;
+
+}
+
+#dropListMenu li:hover > ul {
+    display: block;
+}
+
+
+#dropListMenu li > ul li ul {
+    position: absolute;
+    left: 199px;
+    top: 0px;
+}
+
+
+/*Select with input*/
+
+.select {
+    width: 200px;
+    min-height: 100%;
+    position: relative;
+}
+
+.selectTitle {
+    display: flex;
+}
+
+input.currentItem {
+    width: 200px;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #cecece;
+    background: #e5e5e5;
+    outline: none;
+}
+
+.selectContent {
+    font-size: 14px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    border: 1px solid #a5a5a5;
+    border-top: 0px;
+    background: #F6F6f6;
+}
+
+.selectItem {
+    line-height: 24px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.selectItem:hover {
+    background-color: #a5a5a5;
+    color: #fff;
+}
+
+/*Checkbox*/
+
+.checkbox {
+    position: relative;
+    margin-top: 170px;
+}
+
+.use {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.check {
+    padding-left: 30px;
+}
+
+.myCheckboxInput {
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    position: absolute;
+
+}
+
+.ourBox {
+    position: absolute;
+    margin-left: -30px;
+    height: 20px;
+    width: 20px;
+    background-color: #a5a5a5;
+    border: 2px solid #d5d5d5;
+    border-radius: 2px;
+}
+
+.myCheckboxInput:checked + .ourBox:before {
+    content: "\2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 15px;
+    color: #f3f3f3;
+    text-align: center;
+    line-height: 15px;
+    display: block;
+}
+
+.myCheckboxInput:disabled + .ourBox:before {
+    opacity: 0.6;
+}
+
+/*Radiobutton*/
+
+.radio {
+    padding-left: 30px;
+}
+
+.myRadioInput {
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    position: absolute;
+}
+
+.radioBox {
+    position: absolute;
+    margin-left: -30px;
+    height: 20px;
+    width: 20px;
+    background-color: #a5a5a5;
+    border: 2px solid #d5d5d5;
+    border-radius: 100%;
+}
+
+.myRadioInput:checked + .radioBox:before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #f3f3f3;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 100%;
+    /*font-size: 30px;*/
+    /*text-align: center;*/
+    /*line-height: 16px;*/
+    /*display: block;*/
+
+}
+
+
+
+
+
+
+
+

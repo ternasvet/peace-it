@@ -81,7 +81,7 @@ function tableObj(arr) {
     modalCreateButton.addEventListener('click', function () {
         arr.push(modalData);
         render(arr);
-        modalData = {};
+
         closeModal();
         outText.innerHTML = '';
         setDataForTable(arr);
@@ -143,11 +143,17 @@ function closeModal() {
 
 tableObj(arr);
 
-function getDataForTable(defaultData){
-    if (localStorage.getItem('myObj')) {
-        console.log(localStorage.getItem('myObj'));
-        return JSON.parse(localStorage.getItem('myObj'));
+function getDataForTable(defaultData) {
+    try {
+        if (localStorage.getItem('myObj')) {
+            console.log(localStorage.getItem('myObj'));
+            return JSON.parse(localStorage.getItem('myObj'));
+        }
+
+    } catch (e) {
+       console.log(e);
     }
+
 
     return defaultData;
 }

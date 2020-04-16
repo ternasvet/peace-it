@@ -1,77 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>table</title>
-    <style>
-        /*.border {*/
-        /*    background: white;*/
-        /*    color: white;*/
-        /*}*/
+    <title></title>
+    <style type="text/css">
 
-        /*td, th, tr {*/
-        /*    border: 2px solid #565656;*/
-        /*    background: #727272;*/
-        /*    padding: 10px;*/
-        /*}*/
+        td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        };
+
+        table{
+            width: 100%;
+            margin-top: 100px;
+
+        };
+
+
+
+
+
 
     </style>
+
 </head>
 <body>
-<script>
-    function paginate(count, active, cbClick, mounted) {
-        let array = [];
-        for (let i = 0; i < count; i++){
-            array.push(i)
-        }
-        return {
-            buttonArray: array,
-            cbClick:cbClick,
-            element: document.querySelector(mounted),
-            click: function (number){
-                this.cbClick(number)
-            },
-            createButton: function () {
-                this.buttonArray = this.buttonArray.map(item => {
-                    return paginateItem(item + 1, active, this.click.bind(this));
-                });
-                this.buttonArray.forEach((item) => {
-                    this.element.append(item.render())
-                })
-            },
-            render: function(){
-                this.element.classList.add('paginate');
-                this.createButton();
-                return this
-            }
-        }
-    }
 
 
-    function paginateItem(number, active, cbClick) {
-        const item = {
-            number: number,
-            isActive: active === number,
-            element: document.createElement('div'),
-            render:function () {
-                this.element.innerText = number;
-                this.element.classList.add('paginate-item');
-                if(this.isActive){
-                    this.element.classList.add('active-item');
+<div id="custom-table"  ></div>
+
+
+<script type="text/javascript">
+
+    // fetch ('http://kolbasa.qbex.io/api/categories')
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
+
+    var arr = [
+        {
+
+            "name": "Дорожки",
+            "description": "Дорожки Дорожки Дорожки Дорожки",
+            "subcategories": [
+                {
+                    "name": "Тротуары",
+                    "description": "Описание тротуаров",
+
+                },
+                {
+
+                    "name": "qwe",
+                    "description": "qwe",
+
+                },
+                {
+
+                    "name": "111",
+                    "description": "111",
+
+                }]
+        },
+        {
+            "name": "бетонные столбики",
+            "description": "Железобетонные столбы для винограда малины Запорожья.\n\nПроизводим бетонные столбы для винограда и малины.\nИзготовлены из бетона с армированием тремя прутками по всей длине.\nПо периметру столба,есть четыре бугеля(утолщение) для крепеже проволоки.\nБетонные столбики также часто используют для ограждения участков сеткой рабицей.\nВиноградные столбы очень популярны у дачников,они используют для подвязки вьющихся\nрастений,для подпорки веток деревьев.Они являются самыми дешевыми столбами,\nи не требуют покраски так как не гниют и не подвергаются коррозии.\nВозможна доставка виноградных столбов к вам на участок.",
+            "subcategories": [
+                {
+
+                    "name": "Виноградный столб",
+                    "description": "Бетонный столб высотой 2.5м обычно используют для посадки низкорослых вьщихся кустов (малины, винограда, хмеля). \nТакже возможно использование вбытовых целях, например для установки легких либо временных ограждений (из сетки-рабицы, профнастила и т.д)",
+
                 }
-                this.element.onclick = function (event) {
-                    cbClick(number)
-                };
-                return this.element;
+            ]
+        },
+        {
+            "name": "Ворота эксклюзивные",
+            "description": "Самые лучшие ворота в нашем городе здесь!!!",
+            "subcategories": []
+        },
+        {
+
+            "name": "Ворота",
+            "description": "классные",
+
+        },
+        {
+
+            "name": "123",
+            "description": "asd",
+
+            "subcategories": []
+        },
+        {
+
+            "name": "Изменено2",
+            "description": "Изменено2",
+
+            "subcategories": []
+        }
+    ];
+
+
+    console.log (arr);
+
+    function createTable(array, elementMounted){
+        if(!array) {
+            console.error('first argument required');
+            return false;
+        }
+
+        if(!Array.isArray(array)){
+            console.error('We haven`t array');
+            return false;
+        }
+
+        if(!elementMounted) {
+            console.error('Second argument required');
+            return false;
+        }
+
+        var element = document.querySelector(elementMounted);
+
+        if(!element) {
+            console.error('Element mounted no found');
+            return false;
+        }
+
+        if(array.length < 1) {
+            console.error('We haven`t items in array');
+            return false;
+        }
+
+
+
+        function flattenDeep(arr) {
+            return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val), []);
+        }
+        flattenDeep(arr);
+        console.log (arr);
+
+        var headers = [];
+        array.forEach(item => {
+            var arrKey = Object.keys(item);
+            arrKey.forEach(key => {
+                if(!headers.includes(key)){
+                    headers.push(key);
+                }
+            });
+        });
+
+        var table = document.createElement('table');
+
+        var trForHead = document.createElement('tr');
+
+        headers.forEach(item => {
+            var th = document.createElement('th');
+            th.innerText = item;
+            trForHead.append(th);
+        });
+
+        table.append(trForHead);
+
+        array.forEach(item => {
+            var typeCheck = typeof item === 'object';
+            if(typeCheck){
+                var tr = document.createElement('tr');
+                headers.forEach(key => {
+                    var td = document.createElement('td');
+                    td.innerText = item[key] || '';
+                    tr.append(td)
+                });
+                table.append(tr)
+            } else {
+                console.error(typeCheck, 'Not object');
             }
-        };
-        return item;
+        });
+
+        element.append(table);
     }
 
-    const test = paginate(10, 2, (clickElement) => console.log(clickElement), '#test');
-    console.log(test.render());
+    createTable(arr, '#custom-table');
+
+
 </script>
 </body>
 </html>

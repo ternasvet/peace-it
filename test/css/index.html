@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <title>Drop list</title>
+</head>
+<body>
+<section>
+    <div class="content">
+        <div class="contentInner">
+            <div class="innerdropListMenu"><div class="dropList">
+                <ul id="dropListMenu">
+                    <li class="list"><a href="#" class="myLink">Java Script</a>
+                        <ul class="inner">
+                            <li><a href="#">IT статьи</a></li>
+                            <li><a href="#">Что такое JS</a>
+                                <ul class="inner">
+                                    <li><a href="#">IT статьи</a></li>
+                                    <li><a href="#">Что такое JS</a></li>
+                                    <li><a href="#">Основные моменты в Java Script</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Основные моменты в Java Script</a></li>
+                        </ul>
+                    </li>
+                    <li class="list"><a href="#">PHP</a>
+                        <ul class="inner">
+                            <li><a href="#">Статьи</a></li>
+                            <li><a href="#">Изучение PHP</a>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="list"><a href="#">Pyton</a>
+                        <ul class="inner">
+                            <li><a href="#">Статьи</a></li>
+                            <li><a href="#">Изучение Pyton</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            </div>
+
+            <div class="select">
+                <div class="selectTitle">
+                    <input type="text" class="currentItem" value="value 1">
+                </div>
+                <div class="selectContent">
+                    <div class="selectItem">value 1</div>
+                    <div class="selectItem">value 2</div>
+                    <div class="selectItem">value 3</div>
+                </div>
+            </div>
+
+            <div class="checkbox">
+                <label class="check use">
+                    <input type="checkbox" class="myCheckboxInput">
+                    <span class="ourBox"></span>
+                    check 1
+                </label>
+                <label class="check use">
+                    <input type="checkbox" class="myCheckboxInput" checked>
+                    <span class="ourBox"></span>
+                    check 2
+                </label>
+                <label class="check use">
+                    <input type="checkbox" class="myCheckboxInput" disabled>
+                    <span class="ourBox"></span>
+                    check 3
+                </label>
+                <label class="check use">
+                    <input type="checkbox" class="myCheckboxInput" checked disabled>
+                    <span class="ourBox"></span>
+                    check 4
+                </label>
+            </div>
+
+                <div class="radioBtn">
+                    <label class="radio use">
+                        <input type="radio" class="myRadioInput" name="radio-group" checked>
+                        <span class="radioBox"></span>
+                        radio 1
+                    </label>
+                    <label class="radio use">
+                        <input type="radio" class="myRadioInput" name="radio-group">
+                        <span class="radioBox"></span>
+                        radio 2
+                    </label>
+
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
